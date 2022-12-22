@@ -28,13 +28,13 @@ export const Block = ({title}) => {
 
           {/* 表示名 */}
           <Box borderBottom={0.5} sx={{p: 2}}>
-            <Subtitle text="表示名（管理画面のみで使用します）"/>
+            <Subtitle text="1. 表示名（管理画面のみ）"/>
             <NameField/>
           </Box>
 
           {/* キーワード */}
           <Box borderBottom={0.5} sx={{p: 2}}>
-            <Subtitle text="キーワード"/>
+            <Subtitle text="2. キーワード"/>
             <IsAllMatchRadioGroup/>
             {/* TODO: mapで出力すること */}
             <KeywordField label="キーワード1"/>
@@ -43,7 +43,7 @@ export const Block = ({title}) => {
 
           {/* 返信 */}
           <Box borderBottom={0.5} sx={{p: 2}}>
-            <Subtitle text="返信"/>
+            <Subtitle text="3. 返信"/>
             <IsRandomRadioGroup/>
             {/* TODO: mapで出力すること */}
             <ReplyField label="返信1"/>
@@ -52,7 +52,7 @@ export const Block = ({title}) => {
 
           {/* 返信の表示形式 */}
           <Box borderBottom={0} sx={{p: 2}}>
-            <Subtitle text="返信の表示形式"/>
+            <Subtitle text="4. 返信の表示形式"/>
             <IsEmbedRadioGroup/>
           </Box>
 

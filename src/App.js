@@ -12,7 +12,7 @@ const App = () => {
       <Header/>
 
       {/* body全体のコンテナ */}
-      <Container maxWidth="md">
+      <Container maxWidth="md" sx={{mb: 6}}>
         <Title/>
 
         {/* Blockを繰り返し表示 */}
