@@ -4,7 +4,7 @@ import {FormControl, FormControlLabel, Radio, RadioGroup} from "@mui/material";
 // ランダムで返信を送るかどうかのラジオボタンです
 export const IsRandomRadioGroup = () => {
   return (
-    <FormControl sx={{ml: 1}}>
+    <FormControl sx={{mx: 1}}>
       <RadioGroup
         defaultValue={false}
         name="random-radio"

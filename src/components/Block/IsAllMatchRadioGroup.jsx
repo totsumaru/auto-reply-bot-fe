@@ -4,7 +4,7 @@ import {FormControl, FormControlLabel, Radio, RadioGroup} from "@mui/material";
 // 全て含む/一部を含む のラジオボタンです
 export const IsAllMatchRadioGroup = () => {
   return (
-    <FormControl sx={{ml: 1}}>
+    <FormControl sx={{mx: 1}}>
       <RadioGroup
         defaultValue={true}
         name="all-match-radio"

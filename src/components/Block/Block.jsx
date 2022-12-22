@@ -9,7 +9,10 @@ import {ReplyField} from "./ReplyField";
 import {AddReplyBtn} from "./AddReplyBtn";
 import {IsEmbedRadioGroup} from "./IsEmbedRadioGroup";
 import {BlockAlert} from "./BlockAlert";
+import {Subtitle} from "./Subtitle";
+import {NameField} from "./NameField";
 
+// 1つのブロックです
 export const Block = ({title}) => {
   return (
     <Box sx={{mt: 2}}>
@@ -22,25 +25,36 @@ export const Block = ({title}) => {
           <Typography>{title}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <p>キーワード</p>
-          <IsAllMatchRadioGroup/>
-          {/* TODO: mapで出力すること */}
-          <KeywordField label="キーワード1"/>
-          <KeywordField label="キーワード2"/>
-          <KeywordField label="キーワード3"/>
-          <KeywordField label="キーワード4"/>
-          <AddKeywordBtn/>
 
-          <p>返信</p>
-          <IsRandomRadioGroup/>
-          <ReplyField label="返信1"/>
-          <ReplyField label="返信2"/>
-          <ReplyField label="返信3"/>
-          <ReplyField label="返信4"/>
-          <AddReplyBtn/>
+          {/* 表示名 */}
+          <Box borderBottom={0.5} sx={{p: 2}}>
+            <Subtitle text="表示名（管理画面のみで使用します）"/>
+            <NameField/>
+          </Box>
 
-          <p>返信の表示方法</p>
-          <IsEmbedRadioGroup/>
+          {/* キーワード */}
+          <Box borderBottom={0.5} sx={{p: 2}}>
+            <Subtitle text="キーワード"/>
+            <IsAllMatchRadioGroup/>
+            {/* TODO: mapで出力すること */}
+            <KeywordField label="キーワード1"/>
+            <AddKeywordBtn/>
+          </Box>
+
+          {/* 返信 */}
+          <Box borderBottom={0.5} sx={{p: 2}}>
+            <Subtitle text="返信"/>
+            <IsRandomRadioGroup/>
+            {/* TODO: mapで出力すること */}
+            <ReplyField label="返信1"/>
+            <AddReplyBtn/>
+          </Box>
+
+          {/* 返信の表示形式 */}
+          <Box borderBottom={0} sx={{p: 2}}>
+            <Subtitle text="返信の表示形式"/>
+            <IsEmbedRadioGroup/>
+          </Box>
 
           <BlockAlert text="変更した場合は、必ず保存をしてください。"/>
         </AccordionDetails>

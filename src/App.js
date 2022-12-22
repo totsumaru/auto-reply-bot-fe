@@ -4,6 +4,7 @@ import {Container} from "@mui/material";
 import {Title} from "./components/Title";
 import {Block} from "./components/Block/Block";
 import {SaveBtn} from "./components/SaveBtn";
+import {BlockAddBtn} from "./components/BlockAddBtn";
 
 const App = () => {
   return (
@@ -17,8 +18,9 @@ const App = () => {
         {/* Blockを繰り返し表示 */}
         <Block title={"挨拶を返します"}/>
         <Block title={"ALの情報"}/>
+        <BlockAddBtn/>
 
-        <SaveBtn color="success"/>
+        <SaveBtn color="primary"/>
       </Container>
     </>
   );

@@ -2,11 +2,14 @@ import React from "react";
 import {Box, Button} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 
-// 返信の追加ボタンです
-export const AddReplyBtn = () => {
+// ブロックの追加ボタンです
+export const BlockAddBtn = () => {
   return (
-    <Box sx={{m: 1}}>
-      <Button variant="contained">
+    <Box sx={{
+      textAlign: "center",
+      mt: 2,
+    }}>
+      <Button variant="outlined">
         <AddIcon fontSize="small"/>
       </Button>
     </Box>

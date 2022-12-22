@@ -4,7 +4,7 @@ import {FormControl, FormControlLabel, Radio, RadioGroup} from "@mui/material";
 // 埋め込みで送るかのラジオボタンです
 export const IsEmbedRadioGroup = () => {
   return (
-    <FormControl sx={{ml: 1}}>
+    <FormControl sx={{mx: 1}}>
       <RadioGroup
         defaultValue={true}
         name="embed-radio"
