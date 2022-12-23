@@ -3,7 +3,7 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialState = {
   blocks: [
     {
-      name: "テスト名",
+      name: "",
       keyword: ["hello", "world", "hello"],
       reply: [""],
       isAllMatch: true,

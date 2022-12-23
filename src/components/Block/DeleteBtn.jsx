@@ -12,6 +12,7 @@ export const DeleteBtn = ({blockIndex, index, type}) => {
     <IconButton
       aria-label="delete"
       sx={{m: 1}}
+      disabled={index === 0}
       onClick={(e) => {
         e.preventDefault()
         switch (type) {
