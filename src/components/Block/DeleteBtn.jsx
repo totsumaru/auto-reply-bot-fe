@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import {deleteKeyword, deleteReply} from "../../features/Blocks/blocksSlice";
 
 // 削除のアイコンボタンです
-export const DeleteBtn = ({blockID, index, type}) => {
+export const DeleteBtn = ({blockIndex, index, type}) => {
   const dispatch = useDispatch();
 
   return (
@@ -17,13 +17,13 @@ export const DeleteBtn = ({blockID, index, type}) => {
         switch (type) {
           case "keyword":
             dispatch(deleteKeyword({
-              blockID: blockID,
+              blockIndex: blockIndex,
               keywordIndex: index,
             }))
             break
           case "reply":
             dispatch(deleteReply({
-              blockID: blockID,
+              blockIndex: blockIndex,
               replyIndex: index,
             }))
             break

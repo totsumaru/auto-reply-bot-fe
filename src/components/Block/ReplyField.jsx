@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import {updateReply} from "../../features/Blocks/blocksSlice";
 
 // 返信の入力フィールドです
-export const ReplyField = ({blockID, replyIndex, reply}) => {
+export const ReplyField = ({blockIndex, replyIndex, reply}) => {
   const dispatch = useDispatch();
   const label = "返信" + (replyIndex + 1);
 
@@ -21,14 +21,14 @@ export const ReplyField = ({blockID, replyIndex, reply}) => {
         value={reply}
         onChange={(e) => {
           dispatch(updateReply({
-            blockID: blockID,
+            blockIndex: blockIndex,
             replyIndex: replyIndex,
             value: e.target.value
           }))
         }}
       />
       <DeleteBtn
-        blockID={blockID}
+        blockIndex={blockIndex}
         index={replyIndex}
         type="reply"
       />

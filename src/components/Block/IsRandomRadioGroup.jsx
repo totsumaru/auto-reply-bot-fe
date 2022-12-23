@@ -1,12 +1,10 @@
 import React from "react";
 import {FormControl, FormControlLabel, Radio, RadioGroup} from "@mui/material";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {updateIsRandom} from "../../features/Blocks/blocksSlice";
 
 // ランダムで返信を送るかどうかのラジオボタンです
-export const IsRandomRadioGroup = ({blockID}) => {
-  const blocks = useSelector(state => state.blocks).blocks
-  const block = blocks.find(block => block.id === blockID);
+export const IsRandomRadioGroup = ({blockIndex, block}) => {
   const dispatch = useDispatch();
 
   return (
@@ -19,14 +17,14 @@ export const IsRandomRadioGroup = ({blockID}) => {
           if (block.reply.length > 1) {
             alert("固定に変更するためには、返信を1つにしてください。")
             dispatch(updateIsRandom({
-              blockID: blockID,
+              blockIndex: blockIndex,
               isRandom: true
             }))
             return
           }
 
           dispatch(updateIsRandom({
-            blockID: blockID,
+            blockIndex: blockIndex,
             isRandom: e.target.value === "true",
           }))
         }}

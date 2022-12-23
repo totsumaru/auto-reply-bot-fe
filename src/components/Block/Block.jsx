@@ -13,7 +13,7 @@ import {IsEmbedRadioGroup} from "./IsEmbedRadioGroup";
 import {BlockAlert} from "./BlockAlert";
 
 // 1つのブロックです
-export const Block = ({block}) => {
+export const Block = ({blockIndex, block}) => {
   return (
     <Box sx={{mt: 2}}>
       <Accordion>
@@ -31,7 +31,7 @@ export const Block = ({block}) => {
             <Subtitle text="1. 表示名（管理画面のみ）"/>
             <NameField
               name={block.name}
-              blockID={block.id}
+              blockIndex={blockIndex}
             />
           </Box>
 
@@ -39,38 +39,42 @@ export const Block = ({block}) => {
           <Box borderBottom={0.5} sx={{p: 2}}>
             <Subtitle text="2. キーワード"/>
             {/* ラジオボタン */}
-            <IsAllMatchRadioGroup
-              blockID={block.id}
-            />
+            <IsAllMatchRadioGroup blockIndex={blockIndex}/>
             {/* フォーム */}
             {block.keyword.map((keyword, index) => {
               return <KeywordField
                 key={index}
-                blockID={block.id}
+                blockIndex={blockIndex}
                 keywordIndex={index}
                 keyword={keyword}
               />
             })}
             {/* 追加ボタン */}
-            <AddKeywordBtn blockID={block.id}/>
+            <AddKeywordBtn blockIndex={blockIndex}/>
           </Box>
 
           {/* 返信 */}
           <Box borderBottom={0.5} sx={{p: 2}}>
             <Subtitle text="3. 返信"/>
             {/* ラジオボタン */}
-            <IsRandomRadioGroup blockID={block.id}/>
+            <IsRandomRadioGroup
+              blockIndex={blockIndex}
+              block={block}
+            />
             {/* フォーム */}
             {block.reply.map((reply, index) => {
               return <ReplyField
                 key={index}
-                blockID={block.id}
+                blockIndex={blockIndex}
                 replyIndex={index}
                 reply={reply}
               />
             })}
             {/* 追加ボタン */}
-            <AddReplyBtn blockID={block.id}/>
+            <AddReplyBtn
+              blockIndex={blockIndex}
+              block={block}
+            />
           </Box>
 
           {/* 返信の表示形式 */}

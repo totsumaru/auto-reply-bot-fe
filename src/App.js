@@ -19,7 +19,11 @@ const App = () => {
 
         {/* Blockを繰り返し表示 */}
         {blocks.map((block, index) => {
-          return <Block key={index} block={block}/>
+          return <Block
+            key={index}
+            blockIndex={index}
+            block={block}
+          />
         })}
         <BlockAddBtn/>
 

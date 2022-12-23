@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {updateIsAllMatch} from "../../features/Blocks/blocksSlice";
 
 // 全て含む/一部を含む のラジオボタンです
-export const IsAllMatchRadioGroup = ({blockID}) => {
+export const IsAllMatchRadioGroup = ({blockIndex}) => {
   const dispatch = useDispatch();
 
   return (
@@ -14,7 +14,7 @@ export const IsAllMatchRadioGroup = ({blockID}) => {
         name="all-match-radio"
         onChange={(e) => {
           dispatch(updateIsAllMatch({
-            blockID: blockID,
+            blockIndex: blockIndex,
             isAllMatch: e.target.value === "true",
           }))
         }}

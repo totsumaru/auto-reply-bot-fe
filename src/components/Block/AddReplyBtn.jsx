@@ -1,13 +1,11 @@
 import React from "react";
 import {Box, Button} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {addReply} from "../../features/Blocks/blocksSlice";
 
 // 返信の追加ボタンです
-export const AddReplyBtn = ({blockID}) => {
-  const blocks = useSelector(state => state.blocks).blocks
-  const block = blocks.find(block => block.id === blockID);
+export const AddReplyBtn = ({blockIndex, block}) => {
   const dispatch = useDispatch();
 
   return (
@@ -23,7 +21,7 @@ export const AddReplyBtn = ({blockID}) => {
           }
 
           dispatch(addReply({
-            blockID: blockID
+            blockIndex: blockIndex
           }))
         }}
       >

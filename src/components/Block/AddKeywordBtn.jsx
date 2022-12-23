@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import {addKeyword} from "../../features/Blocks/blocksSlice";
 
 // キーワードの追加ボタンです
-export const AddKeywordBtn = ({blockID}) => {
+export const AddKeywordBtn = ({blockIndex}) => {
   const dispatch = useDispatch();
 
   return (
@@ -15,7 +15,7 @@ export const AddKeywordBtn = ({blockID}) => {
         onClick={(e) => {
           e.preventDefault()
           dispatch(addKeyword({
-            blockID: blockID
+            blockIndex: blockIndex
           }))
         }}
       >

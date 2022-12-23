@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {updateName} from "../../features/Blocks/blocksSlice";
 
 // 表示名の入力フィールドです
-export const NameField = ({name, blockID}) => {
+export const NameField = ({blockIndex, name}) => {
   const dispatch = useDispatch();
 
   return (
@@ -16,7 +16,7 @@ export const NameField = ({name, blockID}) => {
         variant="outlined"
         onChange={(e) => {
           dispatch(updateName({
-            blockID: blockID,
+            blockIndex: blockIndex,
             name: e.target.value
           }))
         }}
