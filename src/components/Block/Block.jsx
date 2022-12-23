@@ -26,7 +26,7 @@ export const Block = ({blockIndex, block}) => {
         </AccordionSummary>
         <AccordionDetails>
 
-          {/* 表示名 */}
+          {/* 1.表示名 */}
           <Box borderBottom={0.5} sx={{p: 2}}>
             <Subtitle text="1. 表示名（管理画面のみ）"/>
             <NameField
@@ -35,7 +35,7 @@ export const Block = ({blockIndex, block}) => {
             />
           </Box>
 
-          {/* キーワード */}
+          {/* 2.キーワード */}
           <Box borderBottom={0.5} sx={{p: 2}}>
             <Subtitle text="2. キーワード"/>
             {/* ラジオボタン */}
@@ -53,7 +53,7 @@ export const Block = ({blockIndex, block}) => {
             <AddKeywordBtn blockIndex={blockIndex}/>
           </Box>
 
-          {/* 返信 */}
+          {/* 3.返信 */}
           <Box borderBottom={0.5} sx={{p: 2}}>
             <Subtitle text="3. 返信"/>
             {/* ラジオボタン */}
@@ -77,10 +77,10 @@ export const Block = ({blockIndex, block}) => {
             />
           </Box>
 
-          {/* 返信の表示形式 */}
+          {/* 4.返信の表示形式 */}
           <Box borderBottom={0} sx={{p: 2}}>
             <Subtitle text="4. 返信の表示形式"/>
-            <IsEmbedRadioGroup/>
+            <IsEmbedRadioGroup blockIndex={blockIndex}/>
           </Box>
 
           <BlockAlert text="変更した場合は、必ず保存をしてください。"/>

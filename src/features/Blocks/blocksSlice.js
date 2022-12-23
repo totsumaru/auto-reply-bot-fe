@@ -63,6 +63,11 @@ const blocksSlice = createSlice({
       const {blockIndex, replyIndex} = action.payload
       state.blocks[blockIndex].reply.splice(replyIndex, 1)
     },
+    // 埋め込みフラグを変更します
+    updateIsEmbed: (state, action) => {
+      const {blockIndex, isEmbed} = action.payload
+      state.blocks[blockIndex].isEmbed = isEmbed
+    },
     // TODO: ブロックを追加します
     // TODO: ブロックを削除します
   }
@@ -75,6 +80,7 @@ export const {
   deleteKeyword,
   updateIsAllMatch,
   updateIsRandom,
+  updateIsEmbed,
   addReply,
   updateReply,
   deleteReply
