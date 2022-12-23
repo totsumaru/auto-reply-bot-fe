@@ -1,9 +1,18 @@
 import {createSlice} from "@reduxjs/toolkit";
 
+const emptyBlock = {
+  name: "",
+  keyword: [""],
+  reply: [""],
+  isAllMatch: true,
+  isRandom: false,
+  isEmbed: false,
+}
+
 const initialState = {
   blocks: [
     {
-      name: "",
+      name: "テスト1",
       keyword: ["hello", "world", "hello"],
       reply: [""],
       isAllMatch: true,
@@ -68,8 +77,15 @@ const blocksSlice = createSlice({
       const {blockIndex, isEmbed} = action.payload
       state.blocks[blockIndex].isEmbed = isEmbed
     },
-    // TODO: ブロックを追加します
+    // ブロックを追加します
+    addBlock: (state) => {
+      state.blocks.push(emptyBlock)
+    },
     // TODO: ブロックを削除します
+    deleteBlock: (state, action) => {
+      const {blockIndex} = action.payload
+      state.blocks.splice(blockIndex, 1)
+    }
   }
 })
 
@@ -83,7 +99,9 @@ export const {
   updateIsEmbed,
   addReply,
   updateReply,
-  deleteReply
+  deleteReply,
+  addBlock,
+  deleteBlock,
 } = blocksSlice.actions;
 
 export default blocksSlice.reducer;

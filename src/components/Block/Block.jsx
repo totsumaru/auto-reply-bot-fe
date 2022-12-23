@@ -11,9 +11,14 @@ import {NameField} from "./NameField";
 import {AddReplyBtn} from "./AddReplyBtn";
 import {IsEmbedRadioGroup} from "./IsEmbedRadioGroup";
 import {BlockAlert} from "./BlockAlert";
+import {BlockDeleteBtn} from "./BlockDeleteBtn";
 
 // 1つのブロックです
 export const Block = ({blockIndex, block}) => {
+  // Index | 表示名 を取得します
+  const name = block.name === "" ? "表示名を設定してください（必須）" : block.name
+  const getName = (blockIndex + 1) + ". " + name
+
   return (
     <Box sx={{mt: 2}}>
       <Accordion>
@@ -22,7 +27,9 @@ export const Block = ({blockIndex, block}) => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>{block.name}</Typography>
+          <Typography>
+            {getName}
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
 
@@ -83,7 +90,13 @@ export const Block = ({blockIndex, block}) => {
             <IsEmbedRadioGroup blockIndex={blockIndex}/>
           </Box>
 
+          {/* 注意事項 */}
           <BlockAlert text="変更した場合は、必ず保存をしてください。"/>
+          {/* ブロックの削除ボタン*/}
+          <BlockDeleteBtn
+            blockIndex={blockIndex}
+            name={block.name}
+          />
         </AccordionDetails>
       </Accordion>
     </Box>
