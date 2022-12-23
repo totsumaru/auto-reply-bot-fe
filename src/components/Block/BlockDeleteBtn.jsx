@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 import {useDispatch} from "react-redux";
 import {deleteBlock} from "../../features/Blocks/blocksSlice";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const BlockDeleteBtn = ({blockIndex, name}) => {
   const [open, setOpen] = useState(false);
@@ -23,6 +24,7 @@ export const BlockDeleteBtn = ({blockIndex, name}) => {
       <Button
         variant="outlined"
         color="error"
+        startIcon={<DeleteIcon/>}
         onClick={(e) => {
           e.preventDefault()
           handleClickOpen()
@@ -47,7 +49,7 @@ export const BlockDeleteBtn = ({blockIndex, name}) => {
             「{name}」を削除しますか？
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{mb: 1, mr: 2}}>
           <Button onClick={handleClose}>キャンセル</Button>
           <Button
             variant="contained"

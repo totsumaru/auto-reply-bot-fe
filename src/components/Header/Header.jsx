@@ -12,7 +12,7 @@ export const Header = () => {
           <Toolbar>
             {/* タイトル */}
             <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-              [自動返信bot] 管理者設定
+              自動返信bot
             </Typography>
 
             {/* アバター */}

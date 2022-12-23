@@ -7,7 +7,7 @@ export const ServerAvatar = () => {
   const {avatarURL} = useSelector(state => state.server)
 
   return (
-    <Box sx={{mr: 2}}>
+    <Box sx={{mr: 1}}>
       {(avatarURL === "")
         ? <Avatar>A</Avatar>
         : <Avatar alt="Avatar" src={avatarURL}/>
