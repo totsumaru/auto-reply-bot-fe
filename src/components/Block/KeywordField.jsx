@@ -27,8 +27,8 @@ export const KeywordField = ({blockID, keywordIndex, keyword}) => {
       />
       <DeleteBtn
         blockID={blockID}
-        keywordIndex={keywordIndex}
-        keyword={keyword}
+        index={keywordIndex}
+        type="keyword"
       />
     </Box>
   )

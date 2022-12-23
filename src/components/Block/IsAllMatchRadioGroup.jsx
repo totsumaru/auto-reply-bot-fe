@@ -15,7 +15,7 @@ export const IsAllMatchRadioGroup = ({blockID}) => {
         onChange={(e) => {
           dispatch(updateIsAllMatch({
             blockID: blockID,
-            isAllMatch: e.target.value,
+            isAllMatch: e.target.value === "true",
           }))
         }}
       >

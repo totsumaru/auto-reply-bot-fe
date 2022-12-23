@@ -6,7 +6,7 @@ const initialState = {
       id: 0,
       name: "テスト名",
       keyword: ["hello", "world", "hello"],
-      reply: [],
+      reply: [""],
       isAllMatch: true,
       isRandom: false,
       isEmbed: false,
@@ -22,7 +22,6 @@ const blocksSlice = createSlice({
     // 名前を更新します
     updateName: (state, action) => {
       const {blockID, name} = action.payload
-      console.log(blockID, name)
       const block = state.blocks.find(block => block.id === blockID)
       block.name = name
     },
@@ -66,7 +65,7 @@ const blocksSlice = createSlice({
     updateReply: (state, action) => {
       const {blockID, replyIndex, value} = action.payload
       const block = state.blocks.find(block => block.id === blockID)
-      block.keyword[replyIndex] = value
+      block.reply[replyIndex] = value
     },
     // 返信を削除します
     deleteReply: (state, action) => {

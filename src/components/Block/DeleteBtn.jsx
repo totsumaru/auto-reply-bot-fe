@@ -2,10 +2,10 @@ import React from "react";
 import {IconButton} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useDispatch} from "react-redux";
-import {deleteKeyword} from "../../features/Blocks/blocksSlice";
+import {deleteKeyword, deleteReply} from "../../features/Blocks/blocksSlice";
 
 // 削除のアイコンボタンです
-export const DeleteBtn = ({blockID, keywordIndex, keyword}) => {
+export const DeleteBtn = ({blockID, index, type}) => {
   const dispatch = useDispatch();
 
   return (
@@ -14,11 +14,21 @@ export const DeleteBtn = ({blockID, keywordIndex, keyword}) => {
       sx={{m: 1}}
       onClick={(e) => {
         e.preventDefault()
-        dispatch(deleteKeyword({
-          blockID: blockID,
-          keywordIndex: keywordIndex,
-          keyword: keyword,
-        }))
+        switch (type) {
+          case "keyword":
+            dispatch(deleteKeyword({
+              blockID: blockID,
+              keywordIndex: index,
+            }))
+            break
+          case "reply":
+            dispatch(deleteReply({
+              blockID: blockID,
+              replyIndex: index,
+            }))
+            break
+          default:
+        }
       }}
     >
       <DeleteIcon/>
