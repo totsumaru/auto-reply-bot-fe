@@ -12,7 +12,7 @@ export const NameField = ({name, blockID}) => {
       <TextField
         id="outlined-basic"
         label="表示名"
-        defaultValue={name}
+        value={name}
         variant="outlined"
         onChange={(e) => {
           dispatch(updateName({

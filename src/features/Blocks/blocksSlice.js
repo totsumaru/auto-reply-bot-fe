@@ -5,7 +5,7 @@ const initialState = {
     {
       id: 0,
       name: "テスト名",
-      keyword: ["hello"],
+      keyword: ["hello", "world", "hello"],
       reply: [],
       isAllMatch: true,
       isRandom: false,
@@ -42,7 +42,7 @@ const blocksSlice = createSlice({
     deleteKeyword: (state, action) => {
       const {blockID, keywordIndex} = action.payload
       const block = state.blocks.find(block => block.id === blockID)
-      block.keyword.splice(keywordIndex, 1)
+      block.keyword.splice(keywordIndex, 1);
     },
     // 全て/一部 のフラグを変更します
     updateIsAllMatch: (state, action) => {
@@ -84,6 +84,7 @@ export const {
   addKeyword,
   updateKeyword,
   deleteKeyword,
+  updateIsAllMatch,
   updateIsRandom,
   addReply,
   updateReply,

@@ -38,10 +38,19 @@ export const Block = ({block}) => {
           {/* キーワード */}
           <Box borderBottom={0.5} sx={{p: 2}}>
             <Subtitle text="2. キーワード"/>
-            <IsAllMatchRadioGroup/>
-            {/* TODO: mapで出力すること */}
-            <KeywordField label="キーワード1"/>
-            <AddKeywordBtn/>
+            <IsAllMatchRadioGroup
+              blockID={block.id}
+            />
+            {block.keyword.map((keyword, index) => {
+              return <KeywordField
+                key={index}
+                blockID={block.id}
+                keywordIndex={index}
+                keyword={keyword}
+              />
+            })}
+
+            <AddKeywordBtn blockID={block.id}/>
           </Box>
 
           {/* 返信 */}
