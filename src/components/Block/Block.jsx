@@ -13,7 +13,7 @@ import {Subtitle} from "./Subtitle";
 import {NameField} from "./NameField";
 
 // 1つのブロックです
-export const Block = ({title}) => {
+export const Block = ({block}) => {
   return (
     <Box sx={{mt: 2}}>
       <Accordion>
@@ -22,14 +22,17 @@ export const Block = ({title}) => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>{title}</Typography>
+          <Typography>{block.name}</Typography>
         </AccordionSummary>
         <AccordionDetails>
 
           {/* 表示名 */}
           <Box borderBottom={0.5} sx={{p: 2}}>
             <Subtitle text="1. 表示名（管理画面のみ）"/>
-            <NameField/>
+            <NameField
+              name={block.name}
+              blockID={block.id}
+            />
           </Box>
 
           {/* キーワード */}

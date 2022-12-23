@@ -5,8 +5,10 @@ import {Title} from "./components/Title";
 import {Block} from "./components/Block/Block";
 import {SaveBtn} from "./components/SaveBtn";
 import {BlockAddBtn} from "./components/BlockAddBtn";
+import {useSelector} from "react-redux";
 
 const App = () => {
+  const {blocks} = useSelector(state => state.blocks);
   return (
     <>
       <Header/>
@@ -16,8 +18,9 @@ const App = () => {
         <Title/>
 
         {/* Blockを繰り返し表示 */}
-        <Block title={"挨拶を返します"}/>
-        <Block title={"ALの情報"}/>
+        {blocks.map((block, index) => {
+          return <Block key={index} block={block}/>
+        })}
         <BlockAddBtn/>
 
         <SaveBtn color="primary"/>

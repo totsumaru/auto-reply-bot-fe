@@ -3,8 +3,9 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialState = {
   blocks: [
     {
-      name: "",
-      keyword: [],
+      id: 0,
+      name: "テスト名",
+      keyword: ["hello"],
       reply: [],
       isAllMatch: true,
       isRandom: false,
@@ -20,49 +21,61 @@ const blocksSlice = createSlice({
   reducers: {
     // 名前を更新します
     updateName: (state, action) => {
-      const {value} = action.payload
-      state.blocks.name = value
+      const {blockID, name} = action.payload
+      console.log(blockID, name)
+      const block = state.blocks.find(block => block.id === blockID)
+      block.name = name
     },
     // 空のキーワードを追加します
     addKeyword: (state, action) => {
-      const {blockIndex} = action.payload
-      state.blocks[blockIndex].keyword.push("")
+      const {blockID} = action.payload
+      const block = state.blocks.find(block => block.id === blockID)
+      block.keyword.push("")
     },
     // キーワードを変更します
     updateKeyword: (state, action) => {
-      const {blockIndex, keywordIndex, value} = action.payload
-      state.blocks[blockIndex].keyword[keywordIndex] = value
+      const {blockID, keywordIndex, value} = action.payload
+      const block = state.blocks.find(block => block.id === blockID)
+      block.keyword[keywordIndex] = value
     },
     // キーワードを削除します
     deleteKeyword: (state, action) => {
-      const {blockIndex, keywordIndex} = action.payload
-      state.blocks[blockIndex].keyword.splice(keywordIndex, 1)
+      const {blockID, keywordIndex} = action.payload
+      const block = state.blocks.find(block => block.id === blockID)
+      block.keyword.splice(keywordIndex, 1)
     },
     // 全て/一部 のフラグを変更します
     updateIsAllMatch: (state, action) => {
-      const {blockIndex, isAllMatch} = action.payload
-      state.blocks[blockIndex].isAllMatch = isAllMatch
+      const {blockID, isAllMatch} = action.payload
+      const block = state.blocks.find(block => block.id === blockID)
+      block.isAllMatch = isAllMatch
     },
     // 返信のランダムフラグを変更します
     updateIsRandom: (state, action) => {
-      const {blockIndex, isRandom} = action.payload
-      state.blocks[blockIndex].isRandom = isRandom
+      const {blockID, isRandom} = action.payload
+      const block = state.blocks.find(block => block.id === blockID)
+      block.isRandom = isRandom
     },
     // 返信を追加します
     addReply: (state, action) => {
-      const {blockIndex} = action.payload
-      state.blocks[blockIndex].reply.push("")
+      const {blockID} = action.payload
+      const block = state.blocks.find(block => block.id === blockID)
+      block.reply.push("")
     },
     // 返信を変更します
     updateReply: (state, action) => {
-      const {blockIndex, replyIndex, value} = action.payload
-      state.blocks[blockIndex].keyword[replyIndex] = value
+      const {blockID, replyIndex, value} = action.payload
+      const block = state.blocks.find(block => block.id === blockID)
+      block.keyword[replyIndex] = value
     },
     // 返信を削除します
     deleteReply: (state, action) => {
-      const {blockIndex, replyIndex} = action.payload
-      state.blocks[blockIndex].reply.splice(replyIndex, 1)
+      const {blockID, replyIndex} = action.payload
+      const block = state.blocks.find(block => block.id === blockID)
+      block.reply.splice(replyIndex, 1)
     },
+    // TODO: ブロックを追加します
+    // TODO: ブロックを削除します
   }
 })
 
