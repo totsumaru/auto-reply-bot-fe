@@ -1,5 +1,5 @@
 import React from "react"
-import {Header} from "./components/Header";
+import {Header} from "./components/Header/Header";
 import {Container, Typography} from "@mui/material";
 import {Title} from "./components/Title";
 import {Block} from "./components/Block/Block";
