@@ -1,4 +1,4 @@
-import React, {useEffect} from "react"
+import React, {useEffect, useState} from "react"
 import axios from "axios";
 import {Container, Typography} from "@mui/material";
 import {Header} from "./components/Header/Header";
@@ -17,11 +17,14 @@ const App = () => {
   const {blocks, isChanged} = useSelector(state => state.blocks);
   const [param] = useSearchParams();
   const serverID = param.get("id");
+  // TODO: ローディング時の処理を作成
+  const [loading, setLoading] = useState(false);
 
   const BackendURL = "http://localhost:8080"
 
   // バックエンドからデータを取得します
   const getData = async (id) => {
+    setLoading(true)
     try {
       const url = `${BackendURL}/server?id=${id}`
       const data = (await axios.get(url)).data
@@ -31,7 +34,7 @@ const App = () => {
 
       data.block.forEach((bl) => {
         const blockRes = {
-          name: "ブロック名はBEが実装されてから入れます",
+          name: bl.name,
           keyword: bl.keyword,
           reply: bl.reply,
           isAllMatch: bl.is_all_match,
@@ -42,15 +45,17 @@ const App = () => {
         blocks.push(blockRes)
       })
 
-      // TODO: tokenはBEの実装後に修正
       dispatch(initiate({
         token: "sample-token-from-useEffect",
-        serverName: "サーバー名はBEが実装されてから入れます",
-        avatarURL: "",
+        serverName: data.server_name,
+        avatarURL: data.avatar_url,
         blocks: blocks,
       }))
       dispatch(setServerID({serverID: serverID}))
+
+      setLoading(false)
     } catch (error) {
+      setLoading(false)
       const {status, statusText} = error.response;
       console.error(`Error! HTTP Status: ${status} ${statusText}`);
     }

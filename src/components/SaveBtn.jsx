@@ -20,12 +20,15 @@ export const SaveBtn = ({color}) => {
     // ローディングをONにする
     setLoading(true)
 
+    // TODO: 全てにバリデーションをかける
+
     try {
       const url = `${BackendURL}/server/config?id=${serverID}`
 
       const blocksReq = []
       argBlocks.forEach((block) => {
         const blockReq = {
+          name: block.name,
           keyword: block.keyword,
           reply: block.reply,
           is_all_match: block.isAllMatch,
@@ -51,9 +54,8 @@ export const SaveBtn = ({color}) => {
       const blocks = []
 
       data.block.forEach((bl) => {
-        // TODO: nameをBEから取得
         const blockRes = {
-          name: "ブロック名はBEが実装されてから入れます",
+          name: bl.name,
           keyword: bl.keyword,
           reply: bl.reply,
           isAllMatch: bl.is_all_match,
@@ -64,11 +66,10 @@ export const SaveBtn = ({color}) => {
         blocks.push(blockRes)
       })
 
-      // TODO: tokenはBEの実装後に修正
       dispatch(initiate({
         token: "sample-token",
-        serverName: "サーバー名はBEが実装されてから入れます",
-        avatarURL: "",
+        serverName: data.server_name,
+        avatarURL: data.avatar_url,
         blocks: blocks,
       }))
 
