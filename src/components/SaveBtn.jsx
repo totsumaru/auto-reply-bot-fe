@@ -10,6 +10,7 @@ export const SaveBtn = ({color}) => {
   const dispatch = useDispatch();
   const {serverID} = useSelector(state => state.serverID);
   const {token, blocks} = useSelector(state => state.blocks);
+  // TODO: ローディング時の表示を作成
   const [loading, setLoading] = useState(false);
 
   // データを保存します
@@ -71,7 +72,10 @@ export const SaveBtn = ({color}) => {
         blocks: blocks,
       }))
 
+      // TODO: 完了時のメッセージをsnackbarで表示
+
     } catch (error) {
+      // TODO: 可能ならsnackbarに変更
       alert("[ERROR]保存に失敗しました。内容を確認して、再度保存してください。")
     }
   }
