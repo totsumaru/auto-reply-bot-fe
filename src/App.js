@@ -17,14 +17,15 @@ const App = () => {
   const {blocks, isChanged} = useSelector(state => state.blocks);
   const [param] = useSearchParams();
   const serverID = param.get("id");
+  const code = param.get("code");
   const [loading, setLoading] = useState(false);
 
   const BackendURL = "http://localhost:8080"
 
   // バックエンドからデータを取得します
-  const getData = async (id) => {
+  const getData = async (id, code) => {
     try {
-      const url = `${BackendURL}/server?id=${id}`
+      const url = `${BackendURL}/server?id=${id}&code=${code}`
       const data = (await axios.get(url)).data
 
       // BEのレスポンスからstoreの形式にマッピング
@@ -49,7 +50,7 @@ const App = () => {
         avatarURL: data.avatar_url,
         blocks: blocks,
       }))
-      dispatch(setServerID({serverID: serverID}))
+      dispatch(setServerID(serverID, code))
 
       setLoading(false)
     } catch (error) {
@@ -62,7 +63,7 @@ const App = () => {
   useEffect(() => {
     setLoading(true);
     (async () => {
-      await getData(serverID)
+      await getData(serverID, code)
     })()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
