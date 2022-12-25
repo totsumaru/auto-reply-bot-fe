@@ -86,7 +86,6 @@ export const SaveBtn = ({color}) => {
       setSuccess(true)
     } catch (error) {
       setLoading(false)
-      console.log(error)
       alert("[ERROR]エラーが発生しました。内容を確認し、再度実行してください。")
     }
   }
