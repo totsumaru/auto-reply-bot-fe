@@ -57,7 +57,9 @@ export const Block = ({blockIndex, block}) => {
               />
             })}
             {/* 追加ボタン */}
-            <AddKeywordBtn blockIndex={blockIndex}/>
+            {block.keyword.length < 5 &&
+              <AddKeywordBtn blockIndex={blockIndex}/>
+            }
           </Box>
 
           {/* 3.返信 */}
@@ -78,10 +80,12 @@ export const Block = ({blockIndex, block}) => {
               />
             })}
             {/* 追加ボタン */}
-            <AddReplyBtn
-              blockIndex={blockIndex}
-              block={block}
-            />
+            {block.reply.length < 5 &&
+              <AddReplyBtn
+                blockIndex={blockIndex}
+                block={block}
+              />
+            }
           </Box>
 
           {/* 4.返信の表示形式 */}
