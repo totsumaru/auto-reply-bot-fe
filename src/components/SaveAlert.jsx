@@ -11,7 +11,7 @@ export const SaveAlert = () => {
     <>
       {isChanged && (
         <Alert
-          color="error"
+          severity="error"
           action={<SaveBtn/>}
           sx={{
             display: "flex",

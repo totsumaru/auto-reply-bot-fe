@@ -17,14 +17,12 @@ const App = () => {
   const {blocks, isChanged} = useSelector(state => state.blocks);
   const [param] = useSearchParams();
   const serverID = param.get("id");
-  // TODO: ローディング時の処理を作成 #1
   const [loading, setLoading] = useState(false);
 
   const BackendURL = "http://localhost:8080"
 
   // バックエンドからデータを取得します
   const getData = async (id) => {
-    setLoading(true)
     try {
       const url = `${BackendURL}/server?id=${id}`
       const data = (await axios.get(url)).data
@@ -62,6 +60,7 @@ const App = () => {
   }
 
   useEffect(() => {
+    setLoading(true);
     (async () => {
       await getData(serverID)
     })()
@@ -90,8 +89,8 @@ const App = () => {
         })}
 
         {/* ブロック追加ボタン */}
-        {blocks.length >= 20
-          ? <Typography sx={{mt: 2}}>上限は20です</Typography>
+        {blocks.length >= 10
+          ? <Typography sx={{mt: 2}}>上限は10です</Typography>
           : <BlockAddBtn/>
         }
 

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {Backdrop, Box, Button, CircularProgress} from "@mui/material";
+import {Alert, Backdrop, Box, Button, CircularProgress, Snackbar} from "@mui/material";
 import SaveIcon from '@mui/icons-material/Save';
 import {useDispatch, useSelector} from "react-redux";
 import {initiate} from "../features/Blocks/blocksSlice";
@@ -10,8 +10,8 @@ export const SaveBtn = ({color}) => {
   const dispatch = useDispatch();
   const {serverID} = useSelector(state => state.serverID);
   const {token, blocks} = useSelector(state => state.blocks);
-  // TODO: ローディング時の表示を作成 #4
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   // データを保存します
   const saveData = async ({argBlocks, argToken}) => {
@@ -73,14 +73,13 @@ export const SaveBtn = ({color}) => {
         blocks: blocks,
       }))
 
-      // TODO: 完了時のメッセージをsnackbarで表示 #5
-
+      // ローディングの終了
       setLoading(false)
+      // Successメッセージの送信
+      setSuccess(true)
     } catch (error) {
       setLoading(false)
-
-      // TODO: 可能ならsnackbarに変更 #6
-      alert("[ERROR]保存に失敗しました。内容を確認して、再度保存してください。")
+      alert("[ERROR]エラーが発生しました。内容を確認し、再度実行してください。")
     }
   }
 
@@ -110,6 +109,26 @@ export const SaveBtn = ({color}) => {
       >
         <CircularProgress color="inherit"/>
       </Backdrop>
+
+      {/* 保存完了時のsnackbar */}
+      <Snackbar
+        open={success}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center"
+        }}
+        autoHideDuration={6000}
+        onClose={() => setSuccess(false)}
+      >
+        <Alert
+          onClose={() => setSuccess(false)}
+          variant="filled"
+          severity="success"
+          sx={{width: '100%'}}
+        >
+          保存に成功しました！
+        </Alert>
+      </Snackbar>
     </>
   )
 }
