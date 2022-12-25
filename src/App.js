@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import axios from "axios";
-import {Container, Typography} from "@mui/material";
+import {Backdrop, CircularProgress, Container, Typography} from "@mui/material";
 import {Header} from "./components/Header/Header";
 import {Title} from "./components/Title";
 import {Block} from "./components/Block/Block";
@@ -17,7 +17,7 @@ const App = () => {
   const {blocks, isChanged} = useSelector(state => state.blocks);
   const [param] = useSearchParams();
   const serverID = param.get("id");
-  // TODO: ローディング時の処理を作成
+  // TODO: ローディング時の処理を作成 #1
   const [loading, setLoading] = useState(false);
 
   const BackendURL = "http://localhost:8080"
@@ -98,6 +98,14 @@ const App = () => {
         {/* 保存ボタン */}
         <SaveBtn color="primary"/>
       </Container>
+
+      {/* 初回読み込み時のバックドロップ */}
+      <Backdrop
+        sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+        open={loading}
+      >
+        <CircularProgress color="inherit"/>
+      </Backdrop>
     </>
   );
 }

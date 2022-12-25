@@ -10,7 +10,7 @@ export const SaveBtn = ({color}) => {
   const dispatch = useDispatch();
   const {serverID} = useSelector(state => state.serverID);
   const {token, blocks} = useSelector(state => state.blocks);
-  // TODO: ローディング時の表示を作成
+  // TODO: ローディング時の表示を作成 #4
   const [loading, setLoading] = useState(false);
 
   // データを保存します
@@ -20,7 +20,7 @@ export const SaveBtn = ({color}) => {
     // ローディングをONにする
     setLoading(true)
 
-    // TODO: 全てにバリデーションをかける
+    // TODO: 全てにバリデーションをかける #2
 
     try {
       const url = `${BackendURL}/server/config?id=${serverID}`
@@ -38,7 +38,7 @@ export const SaveBtn = ({color}) => {
         blocksReq.push(blockReq)
       })
 
-      // TODO: tokenをBEから取得
+      // TODO: tokenをBEから取得 #3
       const data = (await axios.post(url, {
           admin_role_id: "1055362036495826964",
           block: blocksReq,
@@ -73,10 +73,10 @@ export const SaveBtn = ({color}) => {
         blocks: blocks,
       }))
 
-      // TODO: 完了時のメッセージをsnackbarで表示
+      // TODO: 完了時のメッセージをsnackbarで表示 #5
 
     } catch (error) {
-      // TODO: 可能ならsnackbarに変更
+      // TODO: 可能ならsnackbarに変更 #6
       alert("[ERROR]保存に失敗しました。内容を確認して、再度保存してください。")
     }
   }

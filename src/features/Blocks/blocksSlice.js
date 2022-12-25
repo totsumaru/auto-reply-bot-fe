@@ -21,7 +21,7 @@ const initialState = {
       isEmbed: false,
     }
   ],
-  isChanged: true
+  isChanged: false,
 }
 
 // 空のブロックです
