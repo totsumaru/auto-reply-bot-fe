@@ -23,9 +23,9 @@ export const ReplyField = ({blockIndex, replyIndex, reply}) => {
         error={validationErrMsg !== ""}
         helperText={validationErrMsg}
         onChange={(e) => {
-          // バリデーション(最大20文字)
-          if (e.target.value.length > 20) {
-            setValidationErrMsg("最大文字数は20文字です")
+          // バリデーション(最大500文字)
+          if (e.target.value.length > 500) {
+            setValidationErrMsg("最大文字数は500文字です")
             return
           } else {
             setValidationErrMsg("")
