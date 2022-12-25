@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-  token: "foo",
+  token: "",
   serverName: "",
   avatarURL: "",
   roles: [

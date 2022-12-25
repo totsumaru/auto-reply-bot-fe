@@ -26,7 +26,8 @@ const App = () => {
   const getData = async (id, code) => {
     try {
       const url = `${BackendURL}/server?id=${id}&code=${code}`
-      const data = (await axios.get(url)).data
+      const res = await axios.get(url)
+      const data = res.data
 
       // BEのレスポンスからstoreの形式にマッピング
       const blocks = []
@@ -45,18 +46,17 @@ const App = () => {
       })
 
       dispatch(initiate({
-        token: "sample-token-from-useEffect",
+        token: data.token,
         serverName: data.server_name,
         avatarURL: data.avatar_url,
         blocks: blocks,
       }))
-      dispatch(setServerID(serverID, code))
+      dispatch(setServerID({serverID: serverID}))
 
       setLoading(false)
     } catch (error) {
       setLoading(false)
-      const {status, statusText} = error.response;
-      console.error(`Error! HTTP Status: ${status} ${statusText}`);
+      alert(error)
     }
   }
 

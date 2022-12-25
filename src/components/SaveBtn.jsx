@@ -20,8 +20,6 @@ export const SaveBtn = ({color}) => {
     // ローディングをONにする
     setLoading(true)
 
-    // TODO: 全てにバリデーションをかける #2
-
     try {
       const url = `${BackendURL}/server/config?id=${serverID}`
 
@@ -47,7 +45,6 @@ export const SaveBtn = ({color}) => {
         return
       }
 
-      // TODO: tokenをBEから取得 #3
       // POSTリクエストを送信します
       const data = (await axios.post(url, {
           admin_role_id: "1055362036495826964",
@@ -77,7 +74,7 @@ export const SaveBtn = ({color}) => {
       })
 
       dispatch(initiate({
-        token: "sample-token",
+        token: argToken,
         serverName: data.server_name,
         avatarURL: data.avatar_url,
         blocks: blocks,
