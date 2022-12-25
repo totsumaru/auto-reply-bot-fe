@@ -9,7 +9,7 @@ export const ServerAvatar = () => {
   return (
     <Box sx={{mr: 1}}>
       {(avatarURL === "")
-        ? <Avatar>A</Avatar>
+        ? <Avatar></Avatar>
         : <Avatar alt="Avatar" src={avatarURL}/>
       }
     </Box>

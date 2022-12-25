@@ -150,10 +150,10 @@ const validateBlocks = ({blocks}) => {
   for (const [index, block] of blocks.entries()) {
     // ブロック名のバリデーションです
     if (block.name === "") {
-      return `${index + 1}つ目のブロック名が入力されていません`
+      return `${index + 1}つ目の表示名が入力されていません`
     }
     if (block.name.length > 20) {
-      return (`${index + 1}つ目のブロック名が最大文字数を超えています`)
+      return (`${index + 1}つ目の表示名が最大文字数を超えています`)
     }
 
     // キーワードのバリデーションです
