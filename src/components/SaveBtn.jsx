@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {Box, Button} from "@mui/material";
+import {Backdrop, Box, Button, CircularProgress} from "@mui/material";
 import SaveIcon from '@mui/icons-material/Save';
 import {useDispatch, useSelector} from "react-redux";
 import {initiate} from "../features/Blocks/blocksSlice";
@@ -75,28 +75,41 @@ export const SaveBtn = ({color}) => {
 
       // TODO: 完了時のメッセージをsnackbarで表示 #5
 
+      setLoading(false)
     } catch (error) {
+      setLoading(false)
+
       // TODO: 可能ならsnackbarに変更 #6
       alert("[ERROR]保存に失敗しました。内容を確認して、再度保存してください。")
     }
   }
 
   return (
-    <Box sx={{textAlign: "right"}}>
-      <Button
-        variant="contained"
-        color={color}
-        startIcon={<SaveIcon/>}
-        onClick={async (e) => {
-          e.preventDefault()
-          await saveData({
-            argBlocks: blocks,
-            argToken: token
-          })
-        }}
+    <>
+      <Box sx={{textAlign: "right"}}>
+        <Button
+          variant="contained"
+          color={color}
+          startIcon={<SaveIcon/>}
+          onClick={async (e) => {
+            e.preventDefault()
+            await saveData({
+              argBlocks: blocks,
+              argToken: token
+            })
+          }}
+        >
+          保存する
+        </Button>
+      </Box>
+
+      {/* 保存ボタン押下時のローディング */}
+      <Backdrop
+        sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+        open={loading}
       >
-        保存する
-      </Button>
-    </Box>
+        <CircularProgress color="inherit"/>
+      </Backdrop>
+    </>
   )
 }
