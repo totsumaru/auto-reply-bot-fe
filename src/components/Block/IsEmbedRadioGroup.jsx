@@ -4,13 +4,13 @@ import {useDispatch} from "react-redux";
 import {updateIsEmbed} from "../../features/Blocks/blocksSlice";
 
 // 埋め込みで送るかのラジオボタンです
-export const IsEmbedRadioGroup = ({blockIndex}) => {
+export const IsEmbedRadioGroup = ({blockIndex, block}) => {
   const dispatch = useDispatch();
 
   return (
     <FormControl sx={{mx: 1}}>
       <RadioGroup
-        defaultValue={false}
+        value={block.isEmbed}
         name="embed-radio"
         onChange={(e) => {
           dispatch(updateIsEmbed({

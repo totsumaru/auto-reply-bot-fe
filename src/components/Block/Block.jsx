@@ -87,7 +87,10 @@ export const Block = ({blockIndex, block}) => {
           {/* 4.返信の表示形式 */}
           <Box borderBottom={0} sx={{p: 2}}>
             <Subtitle text="4. 返信の表示形式"/>
-            <IsEmbedRadioGroup blockIndex={blockIndex}/>
+            <IsEmbedRadioGroup
+              blockIndex={blockIndex}
+              block={block}
+            />
           </Box>
 
           {/* 注意事項 */}

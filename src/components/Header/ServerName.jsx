@@ -4,11 +4,11 @@ import {Typography} from "@mui/material";
 
 // サーバー名です
 export const ServerName = () => {
-  const {name} = useSelector(state => state.server)
+  const {serverName} = useSelector(state => state.blocks)
 
   return (
     <Typography>
-      {name}
+      {serverName}
     </Typography>
   )
 }

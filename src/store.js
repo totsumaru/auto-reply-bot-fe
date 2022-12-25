@@ -1,10 +1,10 @@
 import {configureStore} from "@reduxjs/toolkit"
 import blocksReducer from "./features/Blocks/blocksSlice";
-import serverReducer from "./features/Server/serverSlice";
+import serverIDReducer from "./features/ServerID/serverIDSlice";
 
 export const store = configureStore({
   reducer: {
     blocks: blocksReducer,
-    server: serverReducer,
+    serverID: serverIDReducer,
   },
 })

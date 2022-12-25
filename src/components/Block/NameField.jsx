@@ -9,7 +9,12 @@ export const NameField = ({blockIndex, name}) => {
   const dispatch = useDispatch();
 
   return (
-    <Box sx={{mx: 1, my: 2, display: "flex", alignItems: "center"}}>
+    <Box maxWidth="400px" sx={{
+      mx: 1,
+      my: 2,
+      display: "flex",
+      alignItems: "center",
+    }}>
       <TextField
         id="outlined-basic"
         label="表示名"
@@ -17,6 +22,9 @@ export const NameField = ({blockIndex, name}) => {
         variant="outlined"
         error={validationErrMsg !== ""}
         helperText={validationErrMsg}
+        sx={{
+          width: "100%"
+        }}
         onChange={(e) => {
           // バリデーション(最大20文字)
           if (e.target.value.length > 20) {
