@@ -23,6 +23,14 @@ export const SaveBtn = ({color}) => {
     try {
       const url = `${BackendURL}/server/config?id=${serverID}`
 
+      // ブロックステートのバリデーションを実行します
+      const errMsg = validateBlocks({blocks: argBlocks})
+      if (errMsg !== "") {
+        setLoading(false)
+        alert(errMsg)
+        return
+      }
+
       // ブロックのリクエストです
       const blocksReq = []
       argBlocks.forEach((block) => {
@@ -36,14 +44,6 @@ export const SaveBtn = ({color}) => {
         }
         blocksReq.push(blockReq)
       })
-
-      // リクエストのバリデーションを実行します
-      const errMsg = validateBlocks({blocks: blocksReq})
-      if (errMsg !== "") {
-        setLoading(false)
-        alert(errMsg)
-        return
-      }
 
       // POSTリクエストを送信します
       const data = (await axios.post(url, {
@@ -59,6 +59,7 @@ export const SaveBtn = ({color}) => {
 
       // BEのレスポンスからstoreの形式にマッピング
       const blocks = []
+      const roles = []
 
       data.block.forEach((bl) => {
         const blockRes = {
@@ -69,14 +70,23 @@ export const SaveBtn = ({color}) => {
           isRandom: bl.is_random,
           isEmbed: bl.is_embed,
         }
-
         blocks.push(blockRes)
+      })
+
+      data.role.forEach((role) => {
+        const roleRes = {
+          id: role.id,
+          name: role.name
+        }
+        roles.push(roleRes)
       })
 
       dispatch(initiate({
         token: argToken,
         serverName: data.server_name,
         avatarURL: data.avatar_url,
+        roles: roles,
+        adminRoleID: data.damin_role_id,
         blocks: blocks,
       }))
 
@@ -141,7 +151,7 @@ export const SaveBtn = ({color}) => {
   )
 }
 
-// リクエストの全てのブロックにバリデーションをかけます
+// 全てのブロックのステートにバリデーションをかけます
 const validateBlocks = ({blocks}) => {
   for (const [index, block] of blocks.entries()) {
     // ブロック名のバリデーションです

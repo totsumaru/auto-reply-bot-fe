@@ -11,6 +11,7 @@ import {useSearchParams} from "react-router-dom";
 import {initiate} from "./features/Blocks/blocksSlice";
 import {setServerID} from "./features/ServerID/serverIDSlice";
 import {SaveAlert} from "./components/SaveAlert";
+import {RoleSelector} from "./components/RoleSelector";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const App = () => {
 
       // BEのレスポンスからstoreの形式にマッピング
       const blocks = []
+      const roles = []
 
       data.block.forEach((bl) => {
         const blockRes = {
@@ -41,14 +43,23 @@ const App = () => {
           isRandom: bl.is_random,
           isEmbed: bl.is_embed,
         }
-
         blocks.push(blockRes)
+      })
+
+      data.role.forEach((role) => {
+        const roleRes = {
+          id: role.id,
+          name: role.name
+        }
+        roles.push(roleRes)
       })
 
       dispatch(initiate({
         token: data.token,
         serverName: data.server_name,
         avatarURL: data.avatar_url,
+        roles: roles,
+        adminRoleID: data.damin_role_id,
         blocks: blocks,
       }))
       dispatch(setServerID({serverID: serverID}))
@@ -56,7 +67,7 @@ const App = () => {
       setLoading(false)
     } catch (error) {
       setLoading(false)
-      alert(error)
+      alert("[ERROR]データを取得できません")
     }
   }
 
@@ -74,11 +85,17 @@ const App = () => {
 
       {/* body全体のコンテナ */}
       <Container maxWidth="md" sx={{mb: 30}}>
-        {/* タイトル */}
-        <Title/>
-
         {/* 保存メッセージ */}
         {isChanged && <SaveAlert/>}
+
+        {/* タイトル */}
+        <Title content="1. 管理者のロールを設定してください"/>
+
+        {/* ロール選択 */}
+        <RoleSelector/>
+
+        {/* タイトル */}
+        <Title content="2. キーワードと返信を設定してください"/>
 
         {/* Blockを繰り返し表示 */}
         {blocks.map((block, index) => {

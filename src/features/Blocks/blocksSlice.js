@@ -41,23 +41,19 @@ const blocksSlice = createSlice({
   reducers: {
     // 初期情報を設定します
     initiate: (state, action) => {
-      const {token, serverName, avatarURL, blocks} = action.payload
+      const {token, serverName, avatarURL, roles, adminRoleID, blocks} = action.payload
       state.token = token
       state.serverName = serverName
       state.avatarURL = avatarURL
+      state.roles = roles
+      state.adminRoleID = adminRoleID
       state.blocks = blocks
       state.isChanged = false
     },
-    // サーバー名を更新します
-    updateServerName: (state, action) => {
-      const {serverName} = action.payload
-      state.serverName = serverName
-      state.isChanged = true
-    },
-    // アバターのURLを更新します
-    updateAvatarURL: (state, action) => {
-      const {avatarURL} = action.payload
-      state.avatarURL = avatarURL
+    // 管理者ロールIDを更新します
+    updateAdminRoleID: (state, action) => {
+      const {adminRoleID} = action.payload
+      state.adminRoleID = adminRoleID
       state.isChanged = true
     },
     // 名前を更新します
@@ -131,28 +127,24 @@ const blocksSlice = createSlice({
       state.blocks.splice(blockIndex, 1)
       state.isChanged = true
     },
-    // 更新済みフラグを解除します
-    setUnChange: (state) => {
-      state.isChanged = false
-    }
   }
 })
 
 export const {
-  updateName,
   initiate,
+  updateAdminRoleID,
+  updateName,
   addKeyword,
   updateKeyword,
   deleteKeyword,
   updateIsAllMatch,
   updateIsRandom,
-  updateIsEmbed,
   addReply,
   updateReply,
   deleteReply,
+  updateIsEmbed,
   addBlock,
   deleteBlock,
-  setUnChange,
 } = blocksSlice.actions;
 
 export default blocksSlice.reducer;
