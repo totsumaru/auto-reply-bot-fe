@@ -15,7 +15,7 @@ export const RoleSelector = () => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={!adminRoleID ? "foo" : adminRoleID}
+          value={!adminRoleID ? "" : adminRoleID}
           label="管理者のロール"
           onChange={(e) => {
             dispatch(updateAdminRoleID({adminRoleID: e.target.value}))

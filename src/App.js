@@ -59,7 +59,7 @@ const App = () => {
         serverName: data.server_name,
         avatarURL: data.avatar_url,
         roles: roles,
-        adminRoleID: data.damin_role_id,
+        adminRoleID: data.admin_role_id,
         blocks: blocks,
       }))
       dispatch(setServerID({serverID: serverID}))

@@ -9,7 +9,7 @@ import {initiate} from "../features/Blocks/blocksSlice";
 export const SaveBtn = ({color}) => {
   const dispatch = useDispatch();
   const {serverID} = useSelector(state => state.serverID);
-  const {token, blocks} = useSelector(state => state.blocks);
+  const {token, blocks, adminRoleID} = useSelector(state => state.blocks);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -47,7 +47,7 @@ export const SaveBtn = ({color}) => {
 
       // POSTリクエストを送信します
       const data = (await axios.post(url, {
-          admin_role_id: "1055362036495826964",
+          admin_role_id: adminRoleID,
           block: blocksReq,
         }, {
           headers: {
@@ -86,7 +86,7 @@ export const SaveBtn = ({color}) => {
         serverName: data.server_name,
         avatarURL: data.avatar_url,
         roles: roles,
-        adminRoleID: data.damin_role_id,
+        adminRoleID: data.admin_role_id,
         blocks: blocks,
       }))
 
