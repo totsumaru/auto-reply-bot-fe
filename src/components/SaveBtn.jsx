@@ -21,6 +21,13 @@ export const SaveBtn = ({color}) => {
     try {
       const url = `${process.env.REACT_APP_BE_ROOT_URL}/server/config?id=${serverID}`
 
+      // 管理者のロールIDのバリデーションを実行します
+      if (!adminRoleID) {
+        setLoading(false)
+        alert("管理者のロールが設定されていません")
+        return
+      }
+
       // ブロックステートのバリデーションを実行します
       const errMsg = validateBlocks({blocks: argBlocks})
       if (errMsg !== "") {
