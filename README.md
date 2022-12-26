@@ -1,6 +1,10 @@
 # auto-reply-bot-fe
 
-自動返信bot（仮: お返事bot）のフロントエンドです。
+自動返信botのフロントエンドです。
+
+変更がある場合は、issue単位でコミットしてください。
+
+`main`ブランチにpushすると、CI/CDで自動で本番環境にDeployされます。
 
 ## 起動
 
@@ -10,4 +14,4 @@ npm start
 
 ## ホスティング
 
-Netlifyを使用します(予定)。
+Netlifyを使用します。
