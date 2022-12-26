@@ -12,6 +12,7 @@ import {initiate} from "./features/Blocks/blocksSlice";
 import {setServerID} from "./features/ServerID/serverIDSlice";
 import {SaveAlert} from "./components/SaveAlert";
 import {RoleSelector} from "./components/RoleSelector";
+import {ErrorHome} from "./components/ErrorHome";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -20,13 +21,12 @@ const App = () => {
   const serverID = param.get("id");
   const code = param.get("code");
   const [loading, setLoading] = useState(false);
-
-  const BackendURL = "http://localhost:8080"
+  const [isErr, setIsErr] = useState(false);
 
   // バックエンドからデータを取得します
   const getData = async (id, code) => {
     try {
-      const url = `${BackendURL}/server?id=${id}&code=${code}`
+      const url = `${process.env.REACT_APP_BE_ROOT_URL}/server?id=${id}&code=${code}`
       const res = await axios.get(url)
       const data = res.data
 
@@ -64,10 +64,11 @@ const App = () => {
       }))
       dispatch(setServerID({serverID: serverID}))
 
+      setIsErr(false)
       setLoading(false)
     } catch (error) {
+      setIsErr(true)
       setLoading(false)
-      alert("[ERROR]データを取得できません")
     }
   }
 
@@ -83,39 +84,45 @@ const App = () => {
     <>
       <Header/>
 
-      {/* body全体のコンテナ */}
-      <Container maxWidth="md" sx={{mb: 30}}>
-        {/* 保存メッセージ */}
-        {isChanged && <SaveAlert/>}
+      {isErr ? (
+        <ErrorHome/>
+      ) : (
+        <>
+          {/* body全体のコンテナ */}
+          <Container maxWidth="md" sx={{mb: 30}}>
+            {/* 保存メッセージ */}
+            {isChanged && <SaveAlert/>}
 
-        {/* タイトル */}
-        <Title content="1. 管理者のロールを設定してください"/>
+            {/* タイトル */}
+            <Title content="1. 管理者のロールを設定してください"/>
 
-        {/* ロール選択 */}
-        <RoleSelector/>
+            {/* ロール選択 */}
+            <RoleSelector/>
 
-        {/* タイトル */}
-        <Title content="2. キーワードと返信を設定してください"/>
+            {/* タイトル */}
+            <Title content="2. キーワードと返信を設定してください"/>
 
-        {/* Blockを繰り返し表示 */}
-        {blocks.map((block, index) => {
-          return <Block
-            key={index}
-            blockIndex={index}
-            block={block}
-          />
-        })}
+            {/* Blockを繰り返し表示 */}
+            {blocks.map((block, index) => {
+              return <Block
+                key={index}
+                blockIndex={index}
+                block={block}
+              />
+            })}
 
-        {/* ブロック追加ボタン */}
-        {blocks.length >= 10
-          ? <Typography sx={{mt: 2}}>上限は10です</Typography>
-          : <BlockAddBtn/>
-        }
+            {/* ブロック追加ボタン */}
+            {blocks.length >= 10
+              ? <Typography sx={{mt: 2}}>上限は10です</Typography>
+              : <BlockAddBtn/>
+            }
 
-        {/* 保存ボタン */}
-        <SaveBtn color="primary"/>
-      </Container>
-
+            {/* 保存ボタン */}
+            <SaveBtn color="primary"/>
+          </Container>
+        </>
+      )
+      }
       {/* 初回読み込み時のバックドロップ */}
       <Backdrop
         sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}

@@ -15,13 +15,11 @@ export const SaveBtn = ({color}) => {
 
   // データを保存します
   const saveData = async ({argBlocks, argToken}) => {
-    const BackendURL = "http://localhost:8080"
-
     // ローディングをONにする
     setLoading(true)
 
     try {
-      const url = `${BackendURL}/server/config?id=${serverID}`
+      const url = `${process.env.REACT_APP_BE_ROOT_URL}/server/config?id=${serverID}`
 
       // ブロックステートのバリデーションを実行します
       const errMsg = validateBlocks({blocks: argBlocks})
