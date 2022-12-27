@@ -96,7 +96,7 @@ const App = () => {
             {/* タイトル */}
             <Title content="1. 管理者のロールを設定してください"/>
             {/* 注意事項 */}
-            <Typography variant="caption" sx={{mt: 2}}>
+            <Typography variant="caption">
               ※誤って変更しないように注意してください。<br/>
               ※変更後のロールを保持していないと修正・保存ができなくなります。
             </Typography>
