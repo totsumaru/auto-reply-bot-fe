@@ -11,7 +11,7 @@ export const ErrorHome = () => {
   const createDiscordLoginURL = () => {
     const redirectURL = `${process.env.REACT_APP_FE_ROOT_URL}?id=${serverID}`
     const encodedRedirectURL = encodeURI(redirectURL)
-    return `https://discord.com/api/oauth2/authorize?client_id=1055348253614419989&redirect_uri=${encodedRedirectURL}&response_type=code&scope=identify`
+    return `https://discord.com/api/oauth2/authorize?client_id=${process.env.REACT_APP_DISCORD_CLIENT_ID}&redirect_uri=${encodedRedirectURL}&response_type=code&scope=identify`
   }
 
   return (
