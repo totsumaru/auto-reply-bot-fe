@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import {addKeyword} from "../../features/Blocks/blocksSlice";
 
 // キーワードの追加ボタンです
-export const AddKeywordBtn = ({blockIndex}) => {
+export const AddKeywordBtn = ({blockIndex, block}) => {
   const dispatch = useDispatch();
 
   return (
@@ -14,6 +14,13 @@ export const AddKeywordBtn = ({blockIndex}) => {
         variant="contained"
         onClick={(e) => {
           e.preventDefault()
+
+          // 完全一致の場合は追加できないため、アラートを出す
+          if (block.matchCondition === "perfect-match") {
+            alert("完全一致の場合は、1つしか設定できません。")
+            return
+          }
+
           dispatch(addKeyword({
             blockIndex: blockIndex
           }))
