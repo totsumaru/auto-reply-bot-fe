@@ -43,7 +43,7 @@ export const SaveBtn = ({color}) => {
           name: block.name,
           keyword: block.keyword,
           reply: block.reply,
-          is_all_match: block.isAllMatch,
+          match_condition: block.matchCondition,
           is_random: block.isRandom,
           is_embed: block.isEmbed,
         }
@@ -71,7 +71,7 @@ export const SaveBtn = ({color}) => {
           name: bl.name,
           keyword: bl.keyword,
           reply: bl.reply,
-          isAllMatch: bl.is_all_match,
+          matchCondition: bl.match_condition,
           isRandom: bl.is_random,
           isEmbed: bl.is_embed,
         }

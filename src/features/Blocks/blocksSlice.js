@@ -16,7 +16,7 @@ const initialState = {
       name: "",
       keyword: [],
       reply: [],
-      isAllMatch: true,
+      matchCondition: "all-contain",
       isRandom: false,
       isEmbed: false,
     }
@@ -29,7 +29,7 @@ const emptyBlock = {
   name: "",
   keyword: [""],
   reply: [""],
-  isAllMatch: true,
+  matchCondition: "all-contain",
   isRandom: false,
   isEmbed: false,
 }
@@ -80,10 +80,10 @@ const blocksSlice = createSlice({
       state.blocks[blockIndex].keyword.splice(keywordIndex, 1);
       state.isChanged = true
     },
-    // 全て/一部 のフラグを変更します
-    updateIsAllMatch: (state, action) => {
-      const {blockIndex, isAllMatch} = action.payload
-      state.blocks[blockIndex].isAllMatch = isAllMatch
+    // キーワードの一致条件を変更します
+    updateMatchCondition: (state, action) => {
+      const {blockIndex, matchCondition} = action.payload
+      state.blocks[blockIndex].matchCondition = matchCondition
       state.isChanged = true
     },
     // 返信のランダムフラグを変更します
@@ -137,7 +137,7 @@ export const {
   addKeyword,
   updateKeyword,
   deleteKeyword,
-  updateIsAllMatch,
+  updateMatchCondition,
   updateIsRandom,
   addReply,
   updateReply,
