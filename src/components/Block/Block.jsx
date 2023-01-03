@@ -46,7 +46,10 @@ export const Block = ({blockIndex, block}) => {
           <Box borderBottom={0.5} sx={{p: 2}}>
             <Subtitle text="2. キーワード"/>
             {/* ラジオボタン */}
-            <IsAllMatchRadioGroup blockIndex={blockIndex}/>
+            <IsAllMatchRadioGroup
+              blockIndex={blockIndex}
+              block={block}
+            />
             {/* フォーム */}
             {block.keyword.map((keyword, index) => {
               return <KeywordField
