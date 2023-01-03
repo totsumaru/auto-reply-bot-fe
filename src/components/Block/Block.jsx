@@ -3,7 +3,7 @@ import {Accordion, AccordionDetails, AccordionSummary, Box, Typography} from "@m
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {AddKeywordBtn} from "./AddKeywordBtn";
 import {KeywordField} from "./KeywordField";
-import {IsAllMatchRadioGroup} from "./IsAllMatchRadioGroup";
+import {MatchConditionRadioGroup} from "./MatchConditionRadioGroup";
 import {IsRandomRadioGroup} from "./IsRandomRadioGroup";
 import {ReplyField} from "./ReplyField";
 import {Subtitle} from "./Subtitle";
@@ -46,7 +46,7 @@ export const Block = ({blockIndex, block}) => {
           <Box borderBottom={0.5} sx={{p: 2}}>
             <Subtitle text="2. キーワード"/>
             {/* ラジオボタン */}
-            <IsAllMatchRadioGroup
+            <MatchConditionRadioGroup
               blockIndex={blockIndex}
               block={block}
             />

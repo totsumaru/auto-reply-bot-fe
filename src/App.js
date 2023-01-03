@@ -39,7 +39,7 @@ const App = () => {
           name: bl.name,
           keyword: bl.keyword,
           reply: bl.reply,
-          isAllMatch: bl.is_all_match,
+          matchCondition: bl.match_condition,
           isRandom: bl.is_random,
           isEmbed: bl.is_embed,
         }
