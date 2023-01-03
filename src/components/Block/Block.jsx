@@ -61,7 +61,10 @@ export const Block = ({blockIndex, block}) => {
             })}
             {/* 追加ボタン */}
             {block.keyword.length < 5 &&
-              <AddKeywordBtn blockIndex={blockIndex}/>
+              <AddKeywordBtn
+                blockIndex={blockIndex}
+                block={block}
+              />
             }
           </Box>
 

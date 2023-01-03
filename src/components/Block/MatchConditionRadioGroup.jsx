@@ -13,6 +13,12 @@ export const MatchConditionRadioGroup = ({blockIndex, block}) => {
         value={block.matchCondition}
         name="all-match-radio"
         onChange={(e) => {
+          // キーワードは複数ある場合は完全一致に変更できない
+          if (e.target.value === "perfect-match" && block.keyword.length > 1) {
+            alert("完全一致にする場合は、キーワードを1つにしてください。")
+            return
+          }
+
           dispatch(updateMatchCondition({
             blockIndex: blockIndex,
             matchCondition: e.target.value,
