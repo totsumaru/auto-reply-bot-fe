@@ -117,8 +117,8 @@ const App = () => {
             })}
 
             {/* ブロック追加ボタン */}
-            {blocks.length >= 10
-              ? <Typography sx={{mt: 2}}>上限は10です</Typography>
+            {blocks.length >= 30
+              ? <Typography sx={{mt: 2}}>上限は30です</Typography>
               : <BlockAddBtn/>
             }
 
