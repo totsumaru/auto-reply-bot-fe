@@ -22,6 +22,7 @@ const initialState = {
     }
   ],
   isChanged: false,
+  nickname: "Comment-bot",
 }
 
 // 空のブロックです
@@ -41,7 +42,7 @@ const blocksSlice = createSlice({
   reducers: {
     // 初期情報を設定します
     initiate: (state, action) => {
-      const {token, serverName, avatarURL, roles, adminRoleID, blocks} = action.payload
+      const {token, serverName, avatarURL, roles, adminRoleID, blocks, nickname} = action.payload
       state.token = token
       state.serverName = serverName
       state.avatarURL = avatarURL
@@ -49,6 +50,7 @@ const blocksSlice = createSlice({
       state.adminRoleID = adminRoleID
       state.blocks = blocks
       state.isChanged = false
+      state.nickname = nickname
     },
     // 管理者ロールIDを更新します
     updateAdminRoleID: (state, action) => {
@@ -127,6 +129,11 @@ const blocksSlice = createSlice({
       state.blocks.splice(blockIndex, 1)
       state.isChanged = true
     },
+    // ニックネームを変更します
+    updateNickname: (state, action) => {
+      const {nickname} = action.payload
+      state.nickname = nickname
+    }
   }
 })
 
@@ -145,6 +152,7 @@ export const {
   updateIsEmbed,
   addBlock,
   deleteBlock,
+  updateNickname,
 } = blocksSlice.actions;
 
 export default blocksSlice.reducer;
