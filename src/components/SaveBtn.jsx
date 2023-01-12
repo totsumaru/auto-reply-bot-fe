@@ -93,6 +93,7 @@ export const SaveBtn = ({color}) => {
         roles: roles,
         adminRoleID: data.admin_role_id,
         blocks: blocks,
+        nickname: data.nickname,
       }))
 
       // ローディングの終了

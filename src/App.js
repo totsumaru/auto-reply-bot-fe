@@ -13,10 +13,11 @@ import {setServerID} from "./features/ServerID/serverIDSlice";
 import {SaveAlert} from "./components/SaveAlert";
 import {RoleSelector} from "./components/RoleSelector";
 import {ErrorHome} from "./components/ErrorHome";
+import {NicknameDialog} from "./components/NicknameDialog";
 
 const App = () => {
   const dispatch = useDispatch();
-  const {blocks, isChanged} = useSelector(state => state.blocks);
+  const {blocks, isChanged, nickname} = useSelector(state => state.blocks);
   const [param] = useSearchParams();
   const serverID = param.get("id");
   const code = param.get("code");
@@ -61,6 +62,7 @@ const App = () => {
         roles: roles,
         adminRoleID: data.admin_role_id,
         blocks: blocks,
+        nickname: data.nickname,
       }))
       dispatch(setServerID({serverID: serverID}))
 
@@ -90,6 +92,9 @@ const App = () => {
         <>
           {/* body全体のコンテナ */}
           <Container maxWidth="md" sx={{mb: 30}}>
+            {/* ニックネーム */}
+            <NicknameDialog nickname={nickname}/>
+
             {/* 保存メッセージ */}
             {isChanged && <SaveAlert/>}
 
