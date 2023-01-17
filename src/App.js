@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import axios from "axios";
-import {Backdrop, Box, CircularProgress, Container, Tab, Typography} from "@mui/material";
+import {Alert, Backdrop, Box, CircularProgress, Container, Tab, Typography} from "@mui/material";
 import {Header} from "./components/Header/Header";
 import {Title} from "./components/Title";
 import {Block} from "./components/Block/Block";
@@ -184,6 +184,11 @@ const App = () => {
 
               {/* 2.URL制限タブ */}
               <TabPanel value="2">
+                <Alert severity="error">
+                  [注意事項]<br/>
+                  基本的にはDiscordの権限設定にて、安全を確保してください。<br/>
+                  botは補助的に使用してください。
+                </Alert>
                 {/* タイトル */}
                 <Title content="1. URL制限をしますか？"/>
 

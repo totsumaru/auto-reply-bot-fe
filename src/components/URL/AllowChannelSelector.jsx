@@ -22,7 +22,7 @@ export const AllowChannelSelector = () => {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={!chID ? "" : chID}
-                label="制限をしないチャンネル"
+                label={"チャンネル" + (index + 1)}
                 onChange={(e) => {
                   dispatch(updateAllowChannelID({index: index, channelID: e.target.value}))
                 }}

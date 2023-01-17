@@ -42,7 +42,6 @@ export const SaveBtn = ({color}) => {
 
       // URL制御のバリデーションを実行します
       const errMsgURLRule = validateURLRule({urlRule: rule.url})
-      console.log(errMsgURLRule)
       if (errMsgURLRule !== "") {
         setLoading(false)
         alert(errMsgURLRule)
@@ -126,8 +125,6 @@ export const SaveBtn = ({color}) => {
         }
         channels.push(channelRes)
       })
-
-      console.log(data)
 
       dispatch(initiate({
         token: token,
@@ -267,6 +264,16 @@ const validateURLRule = ({urlRule}) => {
     if (roleID === "") {
       return "4. 制限を受けないロールが空です。設定しない場合はフォームを削除してください。"
     }
+  }
+
+  // チャンネルIDが重複していないか確認します
+  if (new Set(urlRule.allowChannelID).size !== urlRule.allowChannelID.length) {
+    return "チャンネルが重複しています"
+  }
+
+  // ロールIDが重複していないか確認します
+  if (new Set(urlRule.allowRoleID).size !== urlRule.allowRoleID.length) {
+    return "ロールが重複しています"
   }
 
   return ""

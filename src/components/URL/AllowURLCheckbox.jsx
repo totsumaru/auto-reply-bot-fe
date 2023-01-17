@@ -28,7 +28,7 @@ export const AllowURLCheckbox = () => {
               }}
             />
           }
-          label="YouTube (https://youtube.com/)"
+          label="YouTube (youtube.com)"
         />
 
         {/* Twitter */}
@@ -42,7 +42,7 @@ export const AllowURLCheckbox = () => {
               }}
             />
           }
-          label="Twitter (https://twitter.com/)"
+          label="Twitter (twitter.com)"
         />
 
         {/* GIF */}
@@ -56,7 +56,7 @@ export const AllowURLCheckbox = () => {
               }}
             />
           }
-          label="GIF (https://tenor.com/)"
+          label="GIF (tenor.com)"
         />
       </FormGroup>
     </>

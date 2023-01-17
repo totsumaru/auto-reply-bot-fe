@@ -23,6 +23,7 @@ export const AlertChannelSelector = () => {
               dispatch(updateAlertChannelID({alertChannelID: e.target.value}))
             }}
           >
+            <MenuItem key="none" value="none" sx={{fontWeight: "bold"}}>通知しない</MenuItem>
             {channels.map((channel) => {
               return <MenuItem key={channel.id} value={channel.id}>{channel.name}</MenuItem>
             })}
