@@ -35,6 +35,8 @@ const initialState = {
       isYoutubeAllow: false,
       isTwitterAllow: false,
       isGIFAllow: false,
+      isOpenseaAllow: false,
+      isDiscordAllow: false,
       allowRoleID: [],
       allowChannelID: [],
       alertChannelID: "none",
@@ -179,6 +181,14 @@ const blocksSlice = createSlice({
     updateGIFAllow: (state) => {
       state.rule.url.isGIFAllow = !state.rule.url.isGIFAllow
     },
+    // OpenseaのURL制限を変更します
+    updateOpenseaAllow: (state) => {
+      state.rule.url.isOpenseaAllow = !state.rule.url.isOpenseaAllow
+    },
+    // DiscordのURL制限を変更します
+    updateDiscordAllow: (state) => {
+      state.rule.url.isDiscordAllow = !state.rule.url.isDiscordAllow
+    },
     // 許可するロールを変更します
     updateAllowRoleID: (state, action) => {
       const {index, roleID} = action.payload
@@ -235,6 +245,8 @@ export const {
   updateYoutubeAllow,
   updateTwitterAllow,
   updateGIFAllow,
+  updateOpenseaAllow,
+  updateDiscordAllow,
   updateAllowRoleID,
   addAllowRoleID,
   deleteAllowRoleID,
