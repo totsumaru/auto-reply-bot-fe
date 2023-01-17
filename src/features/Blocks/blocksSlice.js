@@ -10,6 +10,12 @@ const initialState = {
       name: "",
     }
   ],
+  channels: [
+    {
+      id: "",
+      name: "",
+    }
+  ],
   adminRoleID: "",
   blocks: [
     {
@@ -23,6 +29,17 @@ const initialState = {
   ],
   isChanged: false,
   nickname: "Comment-bot",
+  rule: {
+    url: {
+      isRestrict: false,
+      isYoutubeAllow: false,
+      isTwitterAllow: false,
+      isGIFAllow: false,
+      allowRoleID: [],
+      allowChannelID: [],
+      alertChannelID: "none",
+    },
+  },
 }
 
 // 空のブロックです
@@ -133,7 +150,56 @@ const blocksSlice = createSlice({
     updateNickname: (state, action) => {
       const {nickname} = action.payload
       state.nickname = nickname
-    }
+    },
+    // URL制限を変更します
+    updateIsRestrict: (state) => {
+      state.rule.url.isRestrict = !state.rule.url.isRestrict
+    },
+    // YouTubeのURL制限を変更します
+    updateYoutubeAllow: (state) => {
+      state.rule.url.isYoutubeAllow = !state.rule.url.isYoutubeAllow
+    },
+    // TwitterのURL制限を変更します
+    updateTwitterAllow: (state) => {
+      state.rule.url.isTwitterAllow = !state.rule.url.isTwitterAllow
+    },
+    // GIFのURL制限を変更します
+    updateGIFAllow: (state) => {
+      state.rule.url.isGIFAllow = !state.rule.url.isGIFAllow
+    },
+    // 許可するロールを変更します
+    updateAllowRoleID: (state, action) => {
+      const {index, roleID} = action.payload
+      state.rule.url.allowRoleID[index] = roleID
+    },
+    // 許可するロールを追加します
+    addAllowRoleID: (state, action) => {
+      state.rule.url.allowRoleID.push("")
+    },
+    // 許可するロールを削除します
+    deleteAllowRoleID: (state, action) => {
+      const {index} = action.payload
+      state.rule.url.allowRoleID.splice(index, 1);
+    },
+    // 許可するチャンネルを変更します
+    updateAllowChannelID: (state, action) => {
+      const {index, channelID} = action.payload
+      state.rule.url.allowChannelID[index] = channelID
+    },
+    // 許可するチャンネルを追加します
+    addAllowChannelID: (state, action) => {
+      state.rule.url.allowChannelID.push("")
+    },
+    // 許可するチャンネルを削除します
+    deleteAllowChannelID: (state, action) => {
+      const {index} = action.payload
+      state.rule.url.allowChannelID.splice(index, 1);
+    },
+    // アラートを送信するチャンネルを変更します
+    updateAlertChannelID: (state, action) => {
+      const {alertChannelID} = action.payload
+      state.rule.url.alertChannelID = alertChannelID
+    },
   }
 })
 
@@ -153,6 +219,17 @@ export const {
   addBlock,
   deleteBlock,
   updateNickname,
+  updateIsRestrict,
+  updateYoutubeAllow,
+  updateTwitterAllow,
+  updateGIFAllow,
+  updateAllowRoleID,
+  addAllowRoleID,
+  deleteAllowRoleID,
+  updateAllowChannelID,
+  deleteAllowChannelID,
+  addAllowChannelID,
+  updateAlertChannelID,
 } = blocksSlice.actions;
 
 export default blocksSlice.reducer;

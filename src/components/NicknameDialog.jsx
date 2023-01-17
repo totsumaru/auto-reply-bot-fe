@@ -33,7 +33,7 @@ export const NicknameDialog = () => {
 
   return (
     <>
-      <Button variant="outlined" sx={{mt: 3}} onClick={handleClickOpen}>
+      <Button variant="outlined" sx={{mt: 0}} onClick={handleClickOpen}>
         bot名を変更する
       </Button>
       <Dialog

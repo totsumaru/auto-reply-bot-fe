@@ -2,22 +2,20 @@ import React from "react";
 import {Box, Button} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {useDispatch} from "react-redux";
-import {addBlock} from "../features/Blocks/blocksSlice";
+import {addAllowChannelID} from "../../features/Blocks/blocksSlice";
 
-// ブロックの追加ボタンです
-export const BlockAddBtn = () => {
+// チャンネルの追加ボタンです
+export const AddChannelBtn = () => {
   const dispatch = useDispatch();
 
   return (
-    <Box sx={{
-      textAlign: "center",
-      my: 2,
-    }}>
+    <Box sx={{m: 1}}>
       <Button
-        variant="outlined"
+        variant="contained"
         onClick={(e) => {
           e.preventDefault()
-          dispatch(addBlock())
+
+          dispatch(addAllowChannelID({}))
         }}
       >
         <AddIcon fontSize="small"/>
