@@ -43,6 +43,7 @@ const App = () => {
       // BEのレスポンスからstoreの形式にマッピング
       const blocks = []
       const roles = []
+      const channels = []
 
       data.block.forEach((bl) => {
         const blockRes = {
@@ -64,14 +65,34 @@ const App = () => {
         roles.push(roleRes)
       })
 
+      data.channel.forEach((channel) => {
+        const channelRes = {
+          id: channel.id,
+          name: channel.name
+        }
+        channels.push(channelRes)
+      })
+
       dispatch(initiate({
         token: data.token,
         serverName: data.server_name,
         avatarURL: data.avatar_url,
         roles: roles,
+        channels: channels,
         adminRoleID: data.admin_role_id,
         blocks: blocks,
         nickname: data.nickname,
+        rule: {
+          url: {
+            isRestrict: data.rule.url.is_restrict,
+            isYoutubeAllow: data.rule.url.is_youtube_allow,
+            isTwitterAllow: data.rule.url.is_twitter_allow,
+            isGIFAllow: data.rule.url.is_gif_allow,
+            allowRoleID: data.rule.url.allow_role_id,
+            allowChannelID: data.rule.url.allow_channel_id,
+            alertChannelID: data.rule.url.alert_channel_id,
+          },
+        },
       }))
       dispatch(setServerID({serverID: serverID}))
 
@@ -176,13 +197,13 @@ const App = () => {
                 <AllowURLCheckbox/>
 
                 {/* タイトル */}
-                <Title content="3. 以下のチャンネルはURL制限を受けません(上限10)"/>
+                <Title content="3. 制限を受けないチャンネル(上限10)"/>
 
                 {/* URL制限をしないチャンネル */}
                 <AllowChannelSelector/>
 
                 {/* タイトル */}
-                <Title content="4. 以下のロールはURL制限を受けません(上限5)"/>
+                <Title content="4. 制限を受けないロール(上限5)"/>
                 <Typography variant="caption">
                   ※管理者権限を持っている人でも、ここは設定してください。
                 </Typography>
@@ -199,6 +220,11 @@ const App = () => {
 
                 {/* アラートチャンネル */}
                 <AlertChannelSelector/>
+
+                {/* 保存ボタン */}
+                <Box sx={{mt: 2}}>
+                  <SaveBtn color="primary"/>
+                </Box>
 
               </TabPanel>
             </TabContext>

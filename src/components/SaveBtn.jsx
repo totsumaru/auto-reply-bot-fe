@@ -9,17 +9,21 @@ import {initiate} from "../features/Blocks/blocksSlice";
 export const SaveBtn = ({color}) => {
   const dispatch = useDispatch();
   const {serverID} = useSelector(state => state.serverID);
-  const {token, blocks, adminRoleID} = useSelector(state => state.blocks);
+  const {token, blocks, adminRoleID, rule} = useSelector(state => state.blocks);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
   // データを保存します
-  const saveData = async ({argBlocks, argToken}) => {
+  const saveData = async () => {
     // ローディングをONにする
     setLoading(true)
 
     try {
       const url = `${process.env.REACT_APP_BE_ROOT_URL}/server/config?id=${serverID}`
+
+      // -------------------------------------
+      // バリデーション
+      // -------------------------------------
 
       // 管理者のロールIDのバリデーションを実行します
       if (!adminRoleID) {
@@ -29,16 +33,29 @@ export const SaveBtn = ({color}) => {
       }
 
       // ブロックステートのバリデーションを実行します
-      const errMsg = validateBlocks({blocks: argBlocks})
-      if (errMsg !== "") {
+      const errMsgBlocks = validateBlocks({blocks: blocks})
+      if (errMsgBlocks !== "") {
         setLoading(false)
-        alert(errMsg)
+        alert(errMsgBlocks)
         return
       }
 
+      // URL制御のバリデーションを実行します
+      const errMsgURLRule = validateURLRule({urlRule: rule.url})
+      console.log(errMsgURLRule)
+      if (errMsgURLRule !== "") {
+        setLoading(false)
+        alert(errMsgURLRule)
+        return
+      }
+
+      // -------------------------------------
+      // POSTリクエストの送信
+      // -------------------------------------
+
       // ブロックのリクエストです
       const blocksReq = []
-      argBlocks.forEach((block) => {
+      blocks.forEach((block) => {
         const blockReq = {
           name: block.name,
           keyword: block.keyword,
@@ -54,17 +71,33 @@ export const SaveBtn = ({color}) => {
       const data = (await axios.post(url, {
           admin_role_id: adminRoleID,
           block: blocksReq,
+          rule: {
+            url: {
+              is_restrict: rule.url.isRestrict,
+              is_youtube_allow: rule.url.isYoutubeAllow,
+              is_twitter_allow: rule.url.isTwitterAllow,
+              is_gif_allow: rule.url.isGIFAllow,
+              allow_role_id: rule.url.allowRoleID,
+              allow_channel_id: rule.url.allowChannelID,
+              alert_channel_id: rule.url.alertChannelID,
+            },
+          },
         }, {
           headers: {
             'Content-Type': 'application/json',
-            'Token': argToken
+            'Token': token
           },
         },
       )).data
 
+      // -------------------------------------
+      // BEのレスポンスからステートを更新
+      // -------------------------------------
+
       // BEのレスポンスからstoreの形式にマッピング
-      const blocks = []
+      const blocksRes = []
       const roles = []
+      const channels = []
 
       data.block.forEach((bl) => {
         const blockRes = {
@@ -75,7 +108,7 @@ export const SaveBtn = ({color}) => {
           isRandom: bl.is_random,
           isEmbed: bl.is_embed,
         }
-        blocks.push(blockRes)
+        blocksRes.push(blockRes)
       })
 
       data.role.forEach((role) => {
@@ -86,14 +119,36 @@ export const SaveBtn = ({color}) => {
         roles.push(roleRes)
       })
 
+      data.channel.forEach((channel) => {
+        const channelRes = {
+          id: channel.id,
+          name: channel.name
+        }
+        channels.push(channelRes)
+      })
+
+      console.log(data)
+
       dispatch(initiate({
-        token: argToken,
+        token: token,
         serverName: data.server_name,
         avatarURL: data.avatar_url,
         roles: roles,
+        channels: channels,
         adminRoleID: data.admin_role_id,
-        blocks: blocks,
+        blocks: blocksRes,
         nickname: data.nickname,
+        rule: {
+          url: {
+            isRestrict: data.rule.url.is_restrict,
+            isYoutubeAllow: data.rule.url.is_youtube_allow,
+            isTwitterAllow: data.rule.url.is_twitter_allow,
+            isGIFAllow: data.rule.url.is_gif_allow,
+            allowRoleID: data.rule.url.allow_role_id,
+            allowChannelID: data.rule.url.allow_channel_id,
+            alertChannelID: data.rule.url.alert_channel_id,
+          },
+        },
       }))
 
       // ローディングの終了
@@ -116,10 +171,7 @@ export const SaveBtn = ({color}) => {
           startIcon={<SaveIcon/>}
           onClick={async (e) => {
             e.preventDefault()
-            await saveData({
-              argBlocks: blocks,
-              argToken: token
-            })
+            await saveData()
           }}
         >
           保存する
@@ -195,6 +247,25 @@ const validateBlocks = ({blocks}) => {
       if (block.reply.length > 1) {
         return (`「${block.name}」の返信は固定のため、1つしか設定できません`)
       }
+    }
+  }
+
+  return ""
+}
+
+// URL制限のバリデーションを実行します
+const validateURLRule = ({urlRule}) => {
+  // 空のチャンネルIDが設定されていないか確認します
+  for (const channelID of urlRule.allowChannelID) {
+    if (channelID === "") {
+      return "3. 制限を受けないチャンネルが空です。設定しない場合はフォームを削除してください。"
+    }
+  }
+
+  // 空のロールIDが設定されていないか確認します
+  for (const roleID of urlRule.allowRoleID) {
+    if (roleID === "") {
+      return "4. 制限を受けないロールが空です。設定しない場合はフォームを削除してください。"
     }
   }
 

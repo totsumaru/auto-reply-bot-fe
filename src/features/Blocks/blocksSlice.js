@@ -59,15 +59,27 @@ const blocksSlice = createSlice({
   reducers: {
     // 初期情報を設定します
     initiate: (state, action) => {
-      const {token, serverName, avatarURL, roles, adminRoleID, blocks, nickname} = action.payload
+      const {
+        token,
+        serverName,
+        avatarURL,
+        roles,
+        channels,
+        adminRoleID,
+        blocks,
+        nickname,
+        rule,
+      } = action.payload
       state.token = token
       state.serverName = serverName
       state.avatarURL = avatarURL
       state.roles = roles
+      state.channels = channels
       state.adminRoleID = adminRoleID
       state.blocks = blocks
       state.isChanged = false
       state.nickname = nickname
+      state.rule = rule
     },
     // 管理者ロールIDを更新します
     updateAdminRoleID: (state, action) => {

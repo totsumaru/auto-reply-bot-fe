@@ -22,7 +22,6 @@ export const NicknameDialog = () => {
   };
 
   const postUpdate = async () => {
-    console.log(url)
     await axios.post(url, {}, {
       headers: {
         'Content-Type': 'application/json',

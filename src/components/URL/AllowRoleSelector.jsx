@@ -22,9 +22,9 @@ export const AllowRoleSelector = () => {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={!roleID ? "" : roleID}
-                label="制限をしないロール"
+                label={"ロール" + (index + 1)}
                 onChange={(e) => {
-                  dispatch(updateAllowRoleID({index: 1, roleID: e.target.value}))
+                  dispatch(updateAllowRoleID({index: index, roleID: e.target.value}))
                 }}
               >
                 {roles.map((role) => {
