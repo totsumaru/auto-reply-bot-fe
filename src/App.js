@@ -88,6 +88,8 @@ const App = () => {
             isYoutubeAllow: data.rule.url.is_youtube_allow,
             isTwitterAllow: data.rule.url.is_twitter_allow,
             isGIFAllow: data.rule.url.is_gif_allow,
+            isOpenseaAllow: data.rule.url.is_opensea_allow,
+            isDiscordAllow: data.rule.url.is_discord_allow,
             allowRoleID: data.rule.url.allow_role_id,
             allowChannelID: data.rule.url.allow_channel_id,
             alertChannelID: data.rule.url.alert_channel_id,
