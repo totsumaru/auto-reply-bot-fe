@@ -138,7 +138,7 @@ const App = () => {
                 borderColor: 'divider',
               }}>
                 <TabList onChange={handleChange} aria-label="lab API tabs example">
-                  <Tab label="基本設定" value="1"/>
+                  <Tab label="自動返信" value="1"/>
                   <Tab label="URL制限" value="2"/>
                 </TabList>
               </Box>
