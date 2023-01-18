@@ -27,7 +27,7 @@ const App = () => {
   const dispatch = useDispatch();
   const {blocks, isChanged, nickname} = useSelector(state => state.blocks);
   const [param] = useSearchParams();
-  const serverID = param.get("id");
+  const serverID = param.get("state");
   const code = param.get("code");
   const [loading, setLoading] = useState(false);
   const [isErr, setIsErr] = useState(false);
