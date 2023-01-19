@@ -36,7 +36,7 @@ export const AllowURLCheckbox = () => {
               }}
             />
           }
-          label="YouTube (youtube.com)"
+          label="YouTube (youtube.com,youtu.be)"
         />
 
         {/* Twitter */}

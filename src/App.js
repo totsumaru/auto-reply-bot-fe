@@ -21,7 +21,6 @@ import {Restrict} from "./components/URL/Restrict";
 import {AllowURLCheckbox} from "./components/URL/AllowURLCheckbox";
 import {AllowChannelSelector} from "./components/URL/AllowChannelSelector";
 import {AllowRoleSelector} from "./components/URL/AllowRoleSelector";
-import {AlertChannelSelector} from "./components/URL/AlertChannelSelector";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -92,7 +91,6 @@ const App = () => {
             isDiscordAllow: data.rule.url.is_discord_allow,
             allowRoleID: data.rule.url.allow_role_id,
             allowChannelID: data.rule.url.allow_channel_id,
-            alertChannelID: data.rule.url.alert_channel_id,
           },
         },
       }))
@@ -219,14 +217,11 @@ const App = () => {
                 <AllowRoleSelector/>
 
                 {/* タイトル */}
-                <Title content="5. ログを通知するチャンネル"/>
+                <Title content="5. ログを通知するチャンネル(この項目はまもなく削除されます)"/>
                 <Typography variant="caption">
-                  ※許可していないURLが投稿された時に、ログを通知するチャンネルです。<br/>
-                  ※運営メンバーだけが見れるチャンネルにしてください。
+                  ※1/20に仕様変更したため、この項目は不要となります。<br/>
+                  ※このためにチャンネルを用意して頂いていた場合は、削除してください。
                 </Typography>
-
-                {/* アラートチャンネル */}
-                <AlertChannelSelector/>
 
                 {/* 保存ボタン */}
                 <Box sx={{mt: 2}}>

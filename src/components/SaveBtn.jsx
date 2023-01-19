@@ -80,7 +80,6 @@ export const SaveBtn = ({color}) => {
               is_discord_allow: rule.url.isDiscordAllow,
               allow_role_id: rule.url.allowRoleID,
               allow_channel_id: rule.url.allowChannelID,
-              alert_channel_id: rule.url.alertChannelID,
             },
           },
         }, {
@@ -147,7 +146,6 @@ export const SaveBtn = ({color}) => {
             isDiscordAllow: data.rule.url.is_discord_allow,
             allowRoleID: data.rule.url.allow_role_id,
             allowChannelID: data.rule.url.allow_channel_id,
-            alertChannelID: data.rule.url.alert_channel_id,
           },
         },
       }))

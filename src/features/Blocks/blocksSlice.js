@@ -39,7 +39,6 @@ const initialState = {
       isDiscordAllow: false,
       allowRoleID: [],
       allowChannelID: [],
-      alertChannelID: "none",
     },
   },
 }
@@ -217,11 +216,6 @@ const blocksSlice = createSlice({
       const {index} = action.payload
       state.rule.url.allowChannelID.splice(index, 1);
     },
-    // アラートを送信するチャンネルを変更します
-    updateAlertChannelID: (state, action) => {
-      const {alertChannelID} = action.payload
-      state.rule.url.alertChannelID = alertChannelID
-    },
   }
 })
 
@@ -253,7 +247,6 @@ export const {
   updateAllowChannelID,
   deleteAllowChannelID,
   addAllowChannelID,
-  updateAlertChannelID,
 } = blocksSlice.actions;
 
 export default blocksSlice.reducer;
