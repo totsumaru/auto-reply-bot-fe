@@ -18,6 +18,8 @@ export const Block = ({blockIndex, block}) => {
   // Index | 表示名 を取得します
   const name = block.name === "" ? "表示名を設定してください（必須）" : block.name
   const getName = (blockIndex + 1) + ". " + name
+  const keywordMax = 10;
+  const replyMax = 10;
 
   return (
     <Box sx={{mt: 2}}>
@@ -60,7 +62,7 @@ export const Block = ({blockIndex, block}) => {
               />
             })}
             {/* 追加ボタン */}
-            {block.keyword.length < 5 &&
+            {block.keyword.length < keywordMax &&
               <AddKeywordBtn
                 blockIndex={blockIndex}
                 block={block}
@@ -86,7 +88,7 @@ export const Block = ({blockIndex, block}) => {
               />
             })}
             {/* 追加ボタン */}
-            {block.reply.length < 5 &&
+            {block.reply.length < replyMax &&
               <AddReplyBtn
                 blockIndex={blockIndex}
                 block={block}
