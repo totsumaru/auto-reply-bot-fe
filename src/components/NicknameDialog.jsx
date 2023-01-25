@@ -22,6 +22,7 @@ export const NicknameDialog = () => {
   };
 
   const postUpdate = async () => {
+    // ニックネームはURLのクエリパラメータに入っています
     await axios.post(url, {}, {
       headers: {
         'Content-Type': 'application/json',

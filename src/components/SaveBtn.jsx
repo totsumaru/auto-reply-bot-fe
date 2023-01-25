@@ -69,7 +69,9 @@ export const SaveBtn = ({color}) => {
       // POSTリクエストを送信します
       const data = (await axios.post(url, {
           admin_role_id: adminRoleID,
-          block: blocksReq,
+          comment: {
+            block: blocksReq,
+          },
           rule: {
             url: {
               is_restrict: rule.url.isRestrict,
@@ -99,7 +101,7 @@ export const SaveBtn = ({color}) => {
       const roles = []
       const channels = []
 
-      data.block.forEach((bl) => {
+      data.comment.block.forEach((bl) => {
         const blockRes = {
           name: bl.name,
           keyword: bl.keyword,
@@ -156,7 +158,7 @@ export const SaveBtn = ({color}) => {
       setSuccess(true)
     } catch (error) {
       setLoading(false)
-      alert("[ERROR]エラーが発生しました。内容を確認し、再度実行してください。")
+      alert(`[ERROR]エラーが発生しました。内容を確認し、再度実行してください。${error}`)
     }
   }
 
