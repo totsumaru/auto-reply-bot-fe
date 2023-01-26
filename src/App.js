@@ -162,7 +162,7 @@ const App = () => {
                 <AdminRoleSelector/>
 
                 {/* タイトル */}
-                <Title content="2. botのニックネームを変更できます（任意）"/>
+                <Title content="2.（任意）botのニックネームを変更できます"/>
                 <Typography variant="caption" sx={{display: "block", mb: 2}}>
                   ※bot名はこのサーバーでのみ適用されます。
                 </Typography>
@@ -185,7 +185,7 @@ const App = () => {
                 {isChanged && <SaveAlert/>}
 
                 {/* タイトル */}
-                <Title content="1. 自動返信を実行しないチャンネル（任意）"/>
+                <Title content="1.（任意）自動返信を発動しないチャンネル"/>
                 <ChannelSelector/>
 
                 {/* タイトル */}
