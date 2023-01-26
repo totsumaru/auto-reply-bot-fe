@@ -136,18 +136,18 @@ const App = () => {
                 borderColor: 'divider',
               }}>
                 <TabList onChange={handleChange} aria-label="lab API tabs example">
-                  <Tab label="自動返信" value="1"/>
-                  <Tab label="URL制限" value="2"/>
+                  <Tab label="全体設定" value="1"/>
+                  <Tab label="自動返信" value="2"/>
+                  <Tab label="URL制限" value="3"/>
                 </TabList>
               </Box>
 
-              {/* 1.基本設定タブ */}
+              {/* 1.全体設定タブ */}
               <TabPanel value="1">
-                {/* ニックネーム */}
-                <NicknameDialog nickname={nickname}/>
-
-                {/* 保存メッセージ */}
-                {isChanged && <SaveAlert/>}
+                {/* 説明 */}
+                <Typography variant="caption" sx={{display: "block", mb: 1}}>
+                  botの全体に関わる設定です。
+                </Typography>
 
                 {/* タイトル */}
                 <Title content="1. 管理者のロールを設定してください"/>
@@ -156,12 +156,31 @@ const App = () => {
                   ※誤って変更しないように注意してください。<br/>
                   ※変更後のロールを保持していないと修正・保存ができなくなります。
                 </Typography>
-
                 {/* ロール選択 */}
                 <RoleSelector/>
 
                 {/* タイトル */}
-                <Title content="2. キーワードと返信を設定してください"/>
+                <Title content="2. botのニックネームを変更できます（任意）"/>
+                <Typography variant="caption" sx={{display: "block", mb: 1}}>
+                  ※bot名はこのサーバーでのみ適用されます。
+                </Typography>
+                {/* ニックネーム */}
+                <NicknameDialog nickname={nickname}/>
+              </TabPanel>
+
+              {/* 2.基本設定タブ */}
+              <TabPanel value="2">
+                {/* 説明 */}
+                <Typography variant="caption" sx={{display: "block", mb: 1}}>
+                  自動返信の設定です。<br/>
+                  特定のキーワードに自動で返信することができます。
+                </Typography>
+
+                {/* 保存メッセージ */}
+                {isChanged && <SaveAlert/>}
+
+                {/* タイトル */}
+                <Title content="1. キーワードと返信を設定してください"/>
 
                 {/* Blockを繰り返し表示 */}
                 {blocks.map((block, index) => {
@@ -182,8 +201,8 @@ const App = () => {
                 <SaveBtn color="primary"/>
               </TabPanel>
 
-              {/* 2.URL制限タブ */}
-              <TabPanel value="2">
+              {/* 3.URL制限タブ */}
+              <TabPanel value="3">
                 <Alert severity="error">
                   [注意事項]<br/>
                   基本的にはDiscordの権限設定にて、安全を確保してください。<br/>
