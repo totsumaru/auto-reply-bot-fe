@@ -1,7 +1,7 @@
 import React from "react";
 import {FormControl, FormControlLabel, Radio, RadioGroup} from "@mui/material";
 import {useDispatch} from "react-redux";
-import {updateIsEmbed} from "../../features/Blocks/blocksSlice";
+import {updateIsEmbed} from "../../../features/Blocks/blocksSlice";
 
 // 埋め込みで送るかのラジオボタンです
 export const IsEmbedRadioGroup = ({blockIndex, block}) => {

@@ -1,7 +1,7 @@
 import React from "react";
 import {FormControl, FormControlLabel, Radio, RadioGroup} from "@mui/material";
 import {useDispatch} from "react-redux";
-import {updateMatchCondition} from "../../features/Blocks/blocksSlice";
+import {updateMatchCondition} from "../../../features/Blocks/blocksSlice";
 
 // 全て含む/一部を含む のラジオボタンです
 export const MatchConditionRadioGroup = ({blockIndex, block}) => {

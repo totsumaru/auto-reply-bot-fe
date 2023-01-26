@@ -22,7 +22,7 @@ export const Block = ({blockIndex, block}) => {
   const replyMax = 10;
 
   return (
-    <Box sx={{mt: 2}}>
+    <Box sx={{mt: 2, mx: 1}}>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon/>}

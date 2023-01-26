@@ -2,7 +2,7 @@ import React from "react";
 import {Box, Button} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {useDispatch} from "react-redux";
-import {addKeyword} from "../../features/Blocks/blocksSlice";
+import {addKeyword} from "../../../features/Blocks/blocksSlice";
 
 // キーワードの追加ボタンです
 export const AddKeywordBtn = ({blockIndex, block}) => {

@@ -3,17 +3,17 @@ import axios from "axios";
 import {Alert, Backdrop, Box, CircularProgress, Container, Tab, Typography} from "@mui/material";
 import {Header} from "./components/Header/Header";
 import {Title} from "./components/Title";
-import {Block} from "./components/Block/Block";
+import {Block} from "./components/Comment/Block/Block";
 import {SaveBtn} from "./components/SaveBtn";
-import {BlockAddBtn} from "./components/BlockAddBtn";
+import {BlockAddBtn} from "./components/Comment/BlockAddBtn";
 import {useDispatch, useSelector} from "react-redux";
 import {useSearchParams} from "react-router-dom";
 import {initiate} from "./features/Blocks/blocksSlice";
 import {setServerID} from "./features/ServerID/serverIDSlice";
-import {SaveAlert} from "./components/SaveAlert";
-import {RoleSelector} from "./components/RoleSelector";
+import {SaveAlert} from "./components/Comment/SaveAlert";
+import {AdminRoleSelector} from "./components/General/AdminRoleSelector";
 import {ErrorHome} from "./components/ErrorHome";
-import {NicknameDialog} from "./components/NicknameDialog";
+import {NicknameDialog} from "./components/General/NicknameDialog";
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
@@ -21,6 +21,7 @@ import {Restrict} from "./components/URL/Restrict";
 import {AllowURLCheckbox} from "./components/URL/AllowURLCheckbox";
 import {AllowChannelSelector} from "./components/URL/AllowChannelSelector";
 import {AllowRoleSelector} from "./components/URL/AllowRoleSelector";
+import {ChannelSelector} from "./components/Comment/IgnoreChannel/ChannelSelector";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const App = () => {
       const roles = []
       const channels = []
 
-      data.block.forEach((bl) => {
+      data.comment.block.forEach((bl) => {
         const blockRes = {
           name: bl.name,
           keyword: bl.keyword,
@@ -73,6 +74,7 @@ const App = () => {
       })
 
       dispatch(initiate({
+        ignoreChannelID: data.comment.ignore_channel_id,
         token: data.token,
         serverName: data.server_name,
         avatarURL: data.avatar_url,
@@ -142,10 +144,10 @@ const App = () => {
                 </TabList>
               </Box>
 
-              {/* 1.全体設定タブ */}
+              {/* 1.全体設定タブ -------------------------------------------- */}
               <TabPanel value="1">
                 {/* 説明 */}
-                <Typography variant="caption" sx={{display: "block", mb: 1}}>
+                <Typography variant="caption" sx={{display: "block", mb: 2}}>
                   botの全体に関わる設定です。
                 </Typography>
 
@@ -157,21 +159,24 @@ const App = () => {
                   ※変更後のロールを保持していないと修正・保存ができなくなります。
                 </Typography>
                 {/* ロール選択 */}
-                <RoleSelector/>
+                <AdminRoleSelector/>
 
                 {/* タイトル */}
                 <Title content="2. botのニックネームを変更できます（任意）"/>
-                <Typography variant="caption" sx={{display: "block", mb: 1}}>
+                <Typography variant="caption" sx={{display: "block", mb: 2}}>
                   ※bot名はこのサーバーでのみ適用されます。
                 </Typography>
                 {/* ニックネーム */}
                 <NicknameDialog nickname={nickname}/>
+
+                {/* 保存ボタン */}
+                <SaveBtn color="primary"/>
               </TabPanel>
 
-              {/* 2.基本設定タブ */}
+              {/* 2.自動返信タブ -------------------------------------------- */}
               <TabPanel value="2">
                 {/* 説明 */}
-                <Typography variant="caption" sx={{display: "block", mb: 1}}>
+                <Typography variant="caption" sx={{display: "block", mb: 2}}>
                   自動返信の設定です。<br/>
                   特定のキーワードに自動で返信することができます。
                 </Typography>
@@ -180,7 +185,11 @@ const App = () => {
                 {isChanged && <SaveAlert/>}
 
                 {/* タイトル */}
-                <Title content="1. キーワードと返信を設定してください"/>
+                <Title content="1. 自動返信を実行しないチャンネル（任意）"/>
+                <ChannelSelector/>
+
+                {/* タイトル */}
+                <Title content="2. キーワードと返信を設定してください"/>
 
                 {/* Blockを繰り返し表示 */}
                 {blocks.map((block, index) => {
@@ -201,7 +210,7 @@ const App = () => {
                 <SaveBtn color="primary"/>
               </TabPanel>
 
-              {/* 3.URL制限タブ */}
+              {/* 3.URL制限タブ -------------------------------------------- */}
               <TabPanel value="3">
                 <Alert severity="error">
                   [注意事項]<br/>

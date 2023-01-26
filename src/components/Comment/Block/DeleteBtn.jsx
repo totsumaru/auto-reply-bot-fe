@@ -2,7 +2,7 @@ import React from "react";
 import {IconButton} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useDispatch} from "react-redux";
-import {deleteKeyword, deleteReply} from "../../features/Blocks/blocksSlice";
+import {deleteKeyword, deleteReply} from "../../../features/Blocks/blocksSlice";
 
 // 削除のアイコンボタンです
 export const DeleteBtn = ({blockIndex, index, type}) => {

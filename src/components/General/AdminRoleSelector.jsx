@@ -1,10 +1,10 @@
 import React from "react";
 import {Box, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {updateAdminRoleID} from "../features/Blocks/blocksSlice";
+import {updateAdminRoleID} from "../../features/Blocks/blocksSlice";
 
 // 管理者ロールの選択です
-export const RoleSelector = () => {
+export const AdminRoleSelector = () => {
   const dispatch = useDispatch();
   const {adminRoleID, roles} = useSelector(state => state.blocks)
 

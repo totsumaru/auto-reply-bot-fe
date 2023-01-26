@@ -1,7 +1,7 @@
 import React from "react";
 import {Alert, Box} from "@mui/material";
 import {useSelector} from "react-redux";
-import {SaveBtn} from "./SaveBtn";
+import {SaveBtn} from "../SaveBtn";
 
 // 保存を推奨するボタンです
 export const SaveAlert = () => {

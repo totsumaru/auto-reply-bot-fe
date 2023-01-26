@@ -1,7 +1,7 @@
 import React from "react";
 import {FormControl, FormControlLabel, Radio, RadioGroup} from "@mui/material";
 import {useDispatch} from "react-redux";
-import {updateIsRandom} from "../../features/Blocks/blocksSlice";
+import {updateIsRandom} from "../../../features/Blocks/blocksSlice";
 
 // ランダムで返信を送るかどうかのラジオボタンです
 export const IsRandomRadioGroup = ({blockIndex, block}) => {

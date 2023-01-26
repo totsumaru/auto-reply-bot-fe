@@ -9,7 +9,7 @@ import {initiate} from "../features/Blocks/blocksSlice";
 export const SaveBtn = ({color}) => {
   const dispatch = useDispatch();
   const {serverID} = useSelector(state => state.serverID);
-  const {token, blocks, adminRoleID, rule} = useSelector(state => state.blocks);
+  const {token, blocks, ignoreChannelID, adminRoleID, rule} = useSelector(state => state.blocks);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -71,6 +71,7 @@ export const SaveBtn = ({color}) => {
           admin_role_id: adminRoleID,
           comment: {
             block: blocksReq,
+            ignore_channel_id: ignoreChannelID,
           },
           rule: {
             url: {
@@ -130,6 +131,7 @@ export const SaveBtn = ({color}) => {
       })
 
       dispatch(initiate({
+        ignoreChannelID: data.comment.ignore_channel_id,
         token: token,
         serverName: data.server_name,
         avatarURL: data.avatar_url,

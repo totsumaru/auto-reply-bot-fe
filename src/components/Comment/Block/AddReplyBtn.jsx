@@ -2,7 +2,7 @@ import React from "react";
 import {Box, Button} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {useDispatch} from "react-redux";
-import {addReply} from "../../features/Blocks/blocksSlice";
+import {addReply} from "../../../features/Blocks/blocksSlice";
 
 // 返信の追加ボタンです
 export const AddReplyBtn = ({blockIndex, block}) => {

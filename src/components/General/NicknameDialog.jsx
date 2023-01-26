@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
-import {updateNickname} from "../features/Blocks/blocksSlice";
+import {updateNickname} from "../../features/Blocks/blocksSlice";
 
 // ニックネームのダイアログです
 export const NicknameDialog = () => {

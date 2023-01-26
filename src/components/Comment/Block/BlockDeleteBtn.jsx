@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 import {useDispatch} from "react-redux";
-import {deleteBlock} from "../../features/Blocks/blocksSlice";
+import {deleteBlock} from "../../../features/Blocks/blocksSlice";
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export const BlockDeleteBtn = ({blockIndex, name}) => {

@@ -1,34 +1,31 @@
 import React, {useState} from "react";
 import {Box, TextField} from "@mui/material";
+import {DeleteBtn} from "./DeleteBtn";
 import {useDispatch} from "react-redux";
-import {updateName} from "../../features/Blocks/blocksSlice";
+import {updateReply} from "../../../features/Blocks/blocksSlice";
 
-// 表示名の入力フィールドです
-export const NameField = ({blockIndex, name}) => {
+// 返信の入力フィールドです
+export const ReplyField = ({blockIndex, replyIndex, reply}) => {
   const [validationErrMsg, setValidationErrMsg] = useState("");
   const dispatch = useDispatch();
+  const label = "返信" + (replyIndex + 1);
 
   return (
-    <Box maxWidth="400px" sx={{
-      mx: 1,
-      my: 2,
-      display: "flex",
-      alignItems: "center",
-    }}>
+    <Box sx={{mx: 1, my: 2, display: "flex", alignItems: "center"}}>
       <TextField
+        fullWidth
         id="outlined-basic"
-        label="表示名"
-        value={name}
+        label={label}
         variant="outlined"
+        placeholder="Enterで改行できます"
+        multiline
+        value={reply}
         error={validationErrMsg !== ""}
         helperText={validationErrMsg}
-        sx={{
-          width: "100%"
-        }}
         onChange={(e) => {
-          // バリデーション(最大20文字)
-          if (e.target.value.length > 20) {
-            setValidationErrMsg("最大文字数は20文字です")
+          // バリデーション(最大500文字)
+          if (e.target.value.length > 500) {
+            setValidationErrMsg("最大文字数は500文字です")
             return
           } else {
             setValidationErrMsg("")
@@ -37,9 +34,10 @@ export const NameField = ({blockIndex, name}) => {
             setValidationErrMsg("必須項目です")
           }
 
-          dispatch(updateName({
+          dispatch(updateReply({
             blockIndex: blockIndex,
-            name: e.target.value
+            replyIndex: replyIndex,
+            value: e.target.value
           }))
         }}
         onBlur={(e) => {
@@ -48,6 +46,11 @@ export const NameField = ({blockIndex, name}) => {
             setValidationErrMsg("必須項目です")
           }
         }}
+      />
+      <DeleteBtn
+        blockIndex={blockIndex}
+        index={replyIndex}
+        type="reply"
       />
     </Box>
   )

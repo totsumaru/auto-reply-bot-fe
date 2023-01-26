@@ -17,6 +17,7 @@ const initialState = {
     }
   ],
   adminRoleID: "",
+  ignoreChannelID: [],
   blocks: [
     {
       name: "",
@@ -61,6 +62,7 @@ const blocksSlice = createSlice({
     // 初期情報を設定します
     initiate: (state, action) => {
       const {
+        ignoreChannelID,
         token,
         serverName,
         avatarURL,
@@ -71,6 +73,7 @@ const blocksSlice = createSlice({
         nickname,
         rule,
       } = action.payload
+      state.ignoreChannelID = ignoreChannelID
       state.token = token
       state.serverName = serverName
       state.avatarURL = avatarURL
@@ -87,6 +90,20 @@ const blocksSlice = createSlice({
       const {adminRoleID} = action.payload
       state.adminRoleID = adminRoleID
       state.isChanged = true
+    },
+    // コメントを無視するチャンネルを変更します
+    updateIgnoreChannelID: (state, action) => {
+      const {index, channelID} = action.payload
+      state.ignoreChannelID[index] = channelID
+    },
+    // コメントを無視するチャンネルを追加します
+    addIgnoreChannelID: (state, action) => {
+      state.ignoreChannelID.push("")
+    },
+    // コメントを無視するチャンネルを削除します
+    deleteIgnoreChannelID: (state, action) => {
+      const {index} = action.payload
+      state.ignoreChannelID.splice(index, 1);
     },
     // 名前を更新します
     updateName: (state, action) => {
@@ -222,6 +239,9 @@ const blocksSlice = createSlice({
 export const {
   initiate,
   updateAdminRoleID,
+  updateIgnoreChannelID,
+  addIgnoreChannelID,
+  deleteIgnoreChannelID,
   updateName,
   addKeyword,
   updateKeyword,
