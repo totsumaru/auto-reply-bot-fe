@@ -32,6 +32,14 @@ export const SaveBtn = ({color}) => {
         return
       }
 
+      // コメントを発動しないチャンネルのバリデーションを実行します
+      const errMsgIgnoreChannelID = validateIgnoreChannelID({channelID: ignoreChannelID})
+      if (errMsgIgnoreChannelID !== "") {
+        setLoading(false)
+        alert(errMsgIgnoreChannelID)
+        return
+      }
+
       // ブロックステートのバリデーションを実行します
       const errMsgBlocks = validateBlocks({blocks: blocks})
       if (errMsgBlocks !== "") {
@@ -210,6 +218,23 @@ export const SaveBtn = ({color}) => {
       </Snackbar>
     </>
   )
+}
+
+// コメントを発動しないチャンネルにバリデーションをかけます
+const validateIgnoreChannelID = ({channelID}) => {
+  // 空のチャンネルIDが設定されていないか確認します
+  for (const chID of channelID) {
+    if (chID === "") {
+      return "自動返信を発動しないチャンネルが設定されていません"
+    }
+  }
+
+  // チャンネルIDが重複していないか確認します
+  if (new Set(channelID).size !== channelID.length) {
+    return "自動返信を発動しないチャンネルが重複しています"
+  }
+
+  return ""
 }
 
 // 全てのブロックのステートにバリデーションをかけます
