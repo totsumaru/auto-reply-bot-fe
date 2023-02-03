@@ -106,12 +106,11 @@ export const Block = ({blockIndex, block}) => {
             />
           </Box>
 
-          {/* TODO: ここを実装 */}
           {/* 5.実行するチャンネルを限定する */}
           <Box borderBottom={0} sx={{p: 2}}>
             <Subtitle text="5. 実行するチャンネルを限定する"/>
             <Typography variant="caption" sx={{display: "block", mb: 2}}>
-              設定した場合、そのチャンネルでのみでbotが返信します。
+              設定した場合、そのチャンネルでのみbotが返信します。
             </Typography>
 
             <LimitedChannelSelector
