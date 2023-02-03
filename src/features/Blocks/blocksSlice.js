@@ -24,6 +24,7 @@ const initialState = {
       keyword: [],
       reply: [],
       matchCondition: "all-contain",
+      limitedChannelID: [],
       isRandom: false,
       isEmbed: false,
     }
@@ -133,6 +134,24 @@ const blocksSlice = createSlice({
     updateMatchCondition: (state, action) => {
       const {blockIndex, matchCondition} = action.payload
       state.blocks[blockIndex].matchCondition = matchCondition
+      state.isChanged = true
+    },
+    // 空の限定実行チャンネルを追加します
+    addLimitedChannelID: (state, action) => {
+      const {blockIndex} = action.payload
+      state.blocks[blockIndex].limitedChannelID.push("")
+      state.isChanged = true
+    },
+    // 限定実行チャンネルを変更します
+    updateLimitedChannelID: (state, action) => {
+      const {blockIndex, limitedChannelIDIndex, value} = action.payload
+      state.blocks[blockIndex].limitedChannelID[limitedChannelIDIndex] = value
+      state.isChanged = true
+    },
+    // 限定実行チャンネルを削除します
+    deleteLimitedChannelID: (state, action) => {
+      const {blockIndex, limitedChannelIDIndex} = action.payload
+      state.blocks[blockIndex].limitedChannelID.splice(limitedChannelIDIndex, 1);
       state.isChanged = true
     },
     // 返信のランダムフラグを変更します
@@ -247,6 +266,9 @@ export const {
   updateKeyword,
   deleteKeyword,
   updateMatchCondition,
+  addLimitedChannelID,
+  updateLimitedChannelID,
+  deleteLimitedChannelID,
   updateIsRandom,
   addReply,
   updateReply,

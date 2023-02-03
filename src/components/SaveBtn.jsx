@@ -41,7 +41,10 @@ export const SaveBtn = ({color}) => {
       }
 
       // ブロックステートのバリデーションを実行します
-      const errMsgBlocks = validateBlocks({blocks: blocks})
+      const errMsgBlocks = validateBlocks({
+        blocks: blocks,
+        ignoreChannelID: ignoreChannelID,
+      })
       if (errMsgBlocks !== "") {
         setLoading(false)
         alert(errMsgBlocks)
@@ -68,6 +71,7 @@ export const SaveBtn = ({color}) => {
           keyword: block.keyword,
           reply: block.reply,
           match_condition: block.matchCondition,
+          limited_channel_id: block.limitedChannelID,
           is_random: block.isRandom,
           is_embed: block.isEmbed,
         }
@@ -116,6 +120,7 @@ export const SaveBtn = ({color}) => {
           keyword: bl.keyword,
           reply: bl.reply,
           matchCondition: bl.match_condition,
+          limitedChannelID: bl.limited_channel_id,
           isRandom: bl.is_random,
           isEmbed: bl.is_embed,
         }
@@ -238,7 +243,7 @@ const validateIgnoreChannelID = ({channelID}) => {
 }
 
 // 全てのブロックのステートにバリデーションをかけます
-const validateBlocks = ({blocks}) => {
+const validateBlocks = ({blocks, ignoreChannelID}) => {
   for (const [index, block] of blocks.entries()) {
     // ブロック名のバリデーションです
     if (block.name === "") {
@@ -268,6 +273,20 @@ const validateBlocks = ({blocks}) => {
       if (reply.length > 500) {
         return (`「${block.name}」の返信が最大文字数を超えています`)
       }
+    }
+
+    // --------------------------------------------
+    // 限定して実行するチャンネルのバリデーションです
+    // --------------------------------------------
+
+    // 1.チャンネルIDが重複していないか確認します
+    if (new Set(block.limitedChannelID).size !== block.limitedChannelID.length) {
+      return (`「${block.name}」で実行するチャンネルが重複しています`)
+    }
+
+    // 2.自動返信を発動しないチャンネルと重複していないか確認します
+    if (isDuplicate(block.limitedChannelID, ignoreChannelID)) {
+      return (`「${block.name}」で[5.実行するチャンネル]と[自動返信を発動しないチャンネル]が同じとなっています`)
     }
 
     // ランダムフラグのバリデーションです
@@ -308,4 +327,9 @@ const validateURLRule = ({urlRule}) => {
   }
 
   return ""
+}
+
+// 配列同士に重複する値があるか検証します
+const isDuplicate = (arr1, arr2) => {
+  return [...arr1, ...arr2].filter(item => arr1.includes(item) && arr2.includes(item)).length > 0
 }

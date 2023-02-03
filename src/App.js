@@ -51,6 +51,7 @@ const App = () => {
           keyword: bl.keyword,
           reply: bl.reply,
           matchCondition: bl.match_condition,
+          limitedChannelID: bl.limited_channel_id,
           isRandom: bl.is_random,
           isEmbed: bl.is_embed,
         }

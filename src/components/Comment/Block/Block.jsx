@@ -12,6 +12,7 @@ import {AddReplyBtn} from "./AddReplyBtn";
 import {IsEmbedRadioGroup} from "./IsEmbedRadioGroup";
 import {BlockAlert} from "./BlockAlert";
 import {BlockDeleteBtn} from "./BlockDeleteBtn";
+import {LimitedChannelSelector} from "./LimitedChannel/LimitedChannelSelector";
 
 // 1つのブロックです
 export const Block = ({blockIndex, block}) => {
@@ -97,11 +98,24 @@ export const Block = ({blockIndex, block}) => {
           </Box>
 
           {/* 4.返信の表示形式 */}
-          <Box borderBottom={0} sx={{p: 2}}>
+          <Box borderBottom={0.5} sx={{p: 2}}>
             <Subtitle text="4. 返信の表示形式"/>
             <IsEmbedRadioGroup
               blockIndex={blockIndex}
               block={block}
+            />
+          </Box>
+
+          {/* TODO: ここを実装 */}
+          {/* 5.実行するチャンネルを限定する */}
+          <Box borderBottom={0} sx={{p: 2}}>
+            <Subtitle text="5. 実行するチャンネルを限定する"/>
+            <Typography variant="caption" sx={{display: "block", mb: 2}}>
+              設定した場合、そのチャンネルでのみでbotが返信します。
+            </Typography>
+
+            <LimitedChannelSelector
+              blockIndex={blockIndex}
             />
           </Box>
 
