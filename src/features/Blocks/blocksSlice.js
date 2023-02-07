@@ -51,6 +51,7 @@ const emptyBlock = {
   keyword: [""],
   reply: [""],
   matchCondition: "all-contain",
+  limitedChannelID: [],
   isRandom: false,
   isEmbed: false,
 }
