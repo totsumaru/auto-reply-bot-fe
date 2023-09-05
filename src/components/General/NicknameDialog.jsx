@@ -1,17 +1,17 @@
 import React from "react";
-import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField} from "@mui/material";
-import {useDispatch, useSelector} from "react-redux";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import {updateNickname} from "../../features/Blocks/blocksSlice";
+import { updateNickname } from "../../features/Blocks/blocksSlice";
 
 // ニックネームのダイアログです
 export const NicknameDialog = () => {
   const [open, setOpen] = React.useState(false);
-  const {token, nickname} = useSelector(state => state.blocks);
-  const {serverID} = useSelector(state => state.serverID);
+  const { token, nickname } = useSelector(state => state.blocks);
+  const { serverID } = useSelector(state => state.serverID);
   const dispatch = useDispatch();
 
-  const url = `${process.env.REACT_APP_BE_ROOT_URL}/server/nickname?id=${serverID}&name=${nickname}`
+  const url = `${ process.env.REACT_APP_BE_ROOT_URL }/server/nickname?id=${ serverID }&name=${ nickname }`
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -33,17 +33,17 @@ export const NicknameDialog = () => {
 
   return (
     <>
-      <Button variant="outlined" sx={{mt: 0}} onClick={handleClickOpen}>
+      <Button variant="outlined" sx={ { mt: 0 } } onClick={ handleClickOpen }>
         bot名を変更する
       </Button>
       <Dialog
-        open={open}
-        onClose={handleClose}
+        open={ open }
+        onClose={ handleClose }
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          bot名変更を変更します
+          bot名を変更します
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -52,30 +52,30 @@ export const NicknameDialog = () => {
           </DialogContentText>
         </DialogContent>
 
-        {/* フォーム */}
+        {/* フォーム */ }
         <TextField
           id="outlined-basic"
           label="bot名"
-          value={nickname}
+          value={ nickname }
           variant="outlined"
           placeholder="Comment-bot"
-          sx={{
+          sx={ {
             mx: 3
-          }}
-          onChange={(e) => {
-            dispatch(updateNickname({nickname: e.target.value}))
-          }}
+          } }
+          onChange={ (e) => {
+            dispatch(updateNickname({ nickname: e.target.value }))
+          } }
         />
 
-        <DialogActions sx={{m: 2}}>
-          <Button onClick={handleClose}>キャンセル</Button>
+        <DialogActions sx={ { m: 2 } }>
+          <Button onClick={ handleClose }>キャンセル</Button>
           <Button
             variant="contained"
-            onClick={async (e) => {
+            onClick={ async (e) => {
               e.preventDefault()
               await postUpdate()
               handleClose()
-            }}
+            } }
             autoFocus
           >
             変更
