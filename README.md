@@ -14,4 +14,4 @@ npm start
 
 ## ホスティング
 
-Netlifyを使用します。
+Netlify/Vercelを使用します。
